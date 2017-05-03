@@ -48,23 +48,10 @@ class ImageModel{
         $id = $path.'.jpg';
 
     }
-    public function forwebres($id,$path,$filnavn,$filtype,$kvalitet,$w,$h){
+    public function saveweb($id,$kvalitet){
         $img = Image::make($id);
-        if($w == 0 && $h != 0){
-            $img->resize($h, null, function ($constraint) {
-            $constraint->aspectRatio();
-            });
-        }
-        if($h == 0 && $w != 0){
-            $img->resize($w, null, function ($constraint) {
-            $constraint->aspectRatio();
-            });   
-        }else if($w != 0 && $h != 0)
-            $img->resize($w,$h);
-        else
-            echo "Det skjedde en feil";
-        $img->encode($filtype,$kvalitet);
-        $img->save($path.'.'.$filtype);
+        $img->encode('jpg',$kvalitet);
+        $img->save($id,$kvalitet);
 
     }
     public function forweb($id,$value){

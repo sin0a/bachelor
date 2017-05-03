@@ -16,13 +16,12 @@
                     <li class="content"><a href="crop">Crop()</a></li>
                     <li class="content"><a href="flip">Flip()</a></li>
                     <li class="content"><a href="gamma">Gamma()</a></li>
-                    <li class="content"><a href="guide">Guide()</a></li>
                     <li class="content"><a href="greyscale">Greyscale()</a></li>
                     <li class="content"><a href="invert">Invert()</a></li>
                     <li class="content"><a href="pixelerate">Pixelerate()</a></li>
                     <li class="content"><a href="resize">Resize()</a></li>
                     <li class="content"><a href="rotate">Rotate()</a></li>
-                    <li class="content"><a href="forweb">Save for web()</a></li>
+                    <li class="content"><a href="sfw">Save for web()</a></li>
                     <li class="content"><a href="sharpen">Sharpen()</a></li> 
         </ul>
     </div>

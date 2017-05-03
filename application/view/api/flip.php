@@ -14,7 +14,6 @@
                 <div class="thumbnail">
                     <img src="<?='/bachelor/img/1142629.jpg'?>"/>
                 </div>
-            
             <p><b>Flip = h:</b></p>
             <div class="thumbnail">
                 <img src="<?='/bachelor/img/8402556.jpg'?>"/>

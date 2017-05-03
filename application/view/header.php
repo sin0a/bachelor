@@ -1,8 +1,20 @@
+<?php 
+        $nav = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+        if (strpos($nav,'api') !== false) {
+            $active= "active";
+        } 
+        else {
+            $active = "#";
+        }
+        if(strpos($url,'api') == false)
+            $home="active";
+        else
+            $home="#";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -14,13 +26,14 @@
     <link href="<?php echo URL; ?>css/bootstrap.css" rel="stylesheet">
 </head>
 <body>
-    <!-- logo -->
-    <div class="logo">
-    </div>
-
     <!-- navigation -->
-    <div class="navigation">
-        <a href="<?php echo URL; ?>">hjem</a>
-        <a href="<?php echo URL; ?>api/home">api</a>
+    <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="nav navbar-nav">
+         <ul class="nav navbar-nav">
+      <li class="<?php echo $home?>"><a href="<?php echo URL; ?>">Hjem</a></li>
+      <li class="<?php echo $active?>"><a href="<?php echo URL; ?>api/home">Api</a></li>
     </div>
-    
+</div>
+</nav>
+

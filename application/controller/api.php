@@ -126,14 +126,14 @@ class Api extends Controller
                 $model->invert($new);
             }
 
-            /*$utenExt = preg_replace('/\\.[^.\\s]{3,4}$/', '', $new);
-            // lagrer filtype
-            $ext = pathinfo($new, PATHINFO_EXTENSION);
-            // lagrer filnavn
-            $height = $model->getHeight($new);
-            $width = $model->getWidth($new);
-            $res = array($height,$width);
-            $new = $model->saveforweb($new,$utenExt,$res,$name);*/
+            // Save for web
+            if(isset($_GET["sfw"])){
+                if(is_numeric($_GET["sfw"]) && $_GET["sfw"] > 0 && $_GET["sfw"] < 101)
+                    $model->saveweb($new,$_GET["sfw"]);
+                else
+                    echo "Save for web krever en verdi mellom 0 og 100";
+            }
+
             $name = basename($new);
             echo $name;
 
@@ -231,6 +231,12 @@ class Api extends Controller
         $url = URL."api?";
         require APP . 'view/header.php';
         require APP . 'view/api/sharpen.php';
+        require APP . 'view/footer.php';
+    }
+    public function sfw(){
+        $url = URL."api?";
+        require APP . 'view/header.php';
+        require APP . 'view/api/sfw.php';
         require APP . 'view/footer.php';
     }
 }
