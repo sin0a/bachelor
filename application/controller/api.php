@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Class Upload
+ * Klasse upload
  *
 */
 // include composer autoload
@@ -25,23 +25,27 @@ class Api extends Controller
         $returverdi = "En feil oppstod.";
         $int = 0;
 
-        //Sjekk om mottatt request er en GET med riktige action-parametre
+        // Henter bilde fra "path"
         if (isset($_GET["path"])) {
+            // Laster opp bilde på serveren med uploadFromUrl() og setter den til $new
             $new = $api->uploadFromUrl();
 
+            // Sjekker alle mulige parametere i URL
+
             // juster brightness
-            if(isset($_GET["brightness"])&& $_GET["brightness"] > -101 && $_GET["brightness"] < 101){
-                $api->brightness($new,$_GET["brightness"]);
+            if(isset($_GET["brightness"])){
+                if($_GET["brightness"] > -101 && $_GET["brightness"] < 101){
+                    $api->brightness($new,$_GET["brightness"]);
+                } else
+                    echo "Lysstyrke trenger en verdi som er mellom -100 og +100: action=brightness&brightness=verdi";
             }
-            else if(isset($_GET["brightness"])&& $_GET["brightness"] < -101 && $_GET["brightness"] > 101)
-                echo "Lysstyrke trenger en verdi som er mellom -100 og +100: action=brightness&brightness=verdi";
      
             // juster kontrast
-            if(isset($_GET["contrast"])&& $_GET["contrast"] > -101 && $_GET["contrast"] < 101){
-                $api->contrast($new,$_GET["contrast"]);
-            }
-            else if(isset($_GET["contrast"])&& $_GET["contrast"] < -101 && $_GET["contrast"] > 101)
-                echo "Kontrast trenger en verdi som er mellom -100 og +100: action=contrast&contrast=verdi";
+            if(isset($_GET["contrast"]))
+                if($_GET["contrast"] > -101 && $_GET["contrast"] < 101){
+                    $api->contrast($new,$_GET["contrast"]);
+                } else 
+                    echo "Kontrast trenger en verdi som er mellom -100 og +100: action=contrast&contrast=verdi";
             
             // resize
             if(isset($_GET["width"])&& isset($_GET["height"])){
@@ -58,29 +62,29 @@ class Api extends Controller
                 else if (is_numeric($_GET["height"]) && is_numeric($_GET["width"]))
                     $model->resize($new,$_GET["width"],$_GET["height"]);
             }
-            else if($_GET["height"] != "auto" && $_GET["width"] != "auto" && $int == 0 || $_GET["height"] == "auto" && $_GET["width"] == "auto"){
+            else
                 echo "Resize krever følgende syntax: action=resize&width=bredde&height=høyde, width=bredde&height=auto eller width=auto&height=høyde";
-            }}
-            // greyscale
+            }
+            // Greyscale
             if(isset($_GET["greyscale"])){
                 $model->greyscale($new);
             }
             // roter
-            if(isset($_GET["rotate"]) && $_GET["rotate"] > -361 && $_GET["rotate"] < 361){
-                $model->roter($new,$_GET["rotate"]);
+            if(isset($_GET["rotate"])){
+                if($_GET["rotate"] > -361 && $_GET["rotate"] < 361){
+                    $model->roter($new,$_GET["rotate"]);
+                } else 
+                echo "Rotate krever følgende syntax: rotate=verdi Verdien representerer grader fra -360 til +360";
             }
-            //else if(isset($_GET["rotate"] > -361 && $_GET["rotate"] < 361) // sjekk senere
-                //echo "Rotate krever følgende syntax: rotate=verdi Verdien representerer grader fra -360 til +360";
-
-            // opacity
-            if(isset($_GET["opacity"]) && $_GET["opacity"] > -1 && $_GET["opacity"] < 101){
-                $model->opacity($new,$_GET["opacity"]);
-            }
-            else if(isset($_GET["opacity"]) && $_GET["opacity"] > -1 && $_GET["opacity"] > 101){
+            // Opacity
+            if(isset($_GET["opacity"])){
+                if($_GET["opacity"] > -1 && $_GET["opacity"] < 101){
+                    $model->opacity($new,$_GET["opacity"]);
+                } else
                 echo "Opacity krever en verdi mellom 0 og 100";
             }
 
-            // sharpen
+            // Sharpen
             if(isset($_GET["sharpen"]) && $_GET["sharpen"] > -1 && $_GET["sharpen"] < 101){
                 $model->sharpen($new,$_GET["sharpen"]);
             }
@@ -88,82 +92,145 @@ class Api extends Controller
                 echo "Sharpen krever en verdi mellom 0 og 100";
             }
 
-            // blur
-            if(isset($_GET["blur"]) && $_GET["blur"] > -1 && $_GET["blur"] < 101){
-                $model->blur($new,$_GET["blur"]);
-            }
-            else if(isset($_GET["blur"]) && $_GET["blur"] < -1 && $_GET["blur"] > 101){
-                echo "Blur krever en verdi mellom 0 og 100";
+            // Blur
+            if(isset($_GET["blur"])){
+                if($_GET["blur"] > -1 && $_GET["blur"] < 101){
+                    $model->blur($new,$_GET["blur"]);
+                } else
+                    echo "Blur krever en verdi mellom 0 og 100";
             }
 
-            // flip
-            if(isset($_GET["flip"]) && $_GET["flip"] == "v" || isset($_GET["flip"]) && $_GET["flip"] == "h"){
-                $model->flip($new,$_GET["flip"]);
+            // Flip
+            if(isset($_GET["flip"])){
+
+                if($_GET["flip"] == "v" || isset($_GET["flip"]) && $_GET["flip"] == "h"){
+                    $model->flip($new,$_GET["flip"]);
+                }else
+                    echo "Flip tar bare to verdier: 'v' eller 'h'";
             }
-            else if(isset($_GET["flip"]) && $_GET["flip"] != "v" || isset($_GET["flip"]) && $_GET["flip"] != "h"){
-                echo "Flip tar bare to verdier: 'v' eller 'h'";
-            }
-            // pixelerate
+            // Pixelerate
             if(isset($_GET["pxl"]) && is_numeric($_GET["pxl"])){
                 $model->pixelerate($new,$_GET["pxl"]);
             }
 
-            // gamma
-            if(isset($_GET["gamma"]) && is_numeric($_GET["gamma"])){
-                $model->gamma($new,$_GET["gamma"]);
+            // Gamma
+            if(isset($_GET["gamma"])){
+                if(is_numeric($_GET["gamma"]) && $_GET["gamma"] > 0){
+                    $model->gamma($new,$_GET["gamma"]);
+                }else
+                echo "Gamma må ha en positiv verdi mellom 0.1 og 30.0";
             }
 
-            $utenExt = preg_replace('/\\.[^.\\s]{3,4}$/', '', $new);
+            // Invert
+            if(isset($_GET["invert"])){
+                $model->invert($new);
+            }
+
+            /*$utenExt = preg_replace('/\\.[^.\\s]{3,4}$/', '', $new);
             // lagrer filtype
             $ext = pathinfo($new, PATHINFO_EXTENSION);
             // lagrer filnavn
-            $name = basename($new);
             $height = $model->getHeight($new);
             $width = $model->getWidth($new);
             $res = array($height,$width);
+            $new = $model->saveforweb($new,$utenExt,$res,$name);*/
+            $name = basename($new);
             echo $name;
 
-            //$new = $model->saveforweb($new,$utenExt,$res,$name);
+           
         }
     	
-    	// load views
-        //require APP . 'view/header.php';
         require APP . 'view/api/index.php';
-        //require APP . 'view/footer.php';
     }
+    // Alle undersidene til /api/
+
     public function home(){
         require APP . 'view/header.php';
         require APP . 'view/api/home.php';
         require APP . 'view/footer.php';
     }
+
     public function blur(){
-        $url = "localhost/bachelor/api?";
+        $url = URL."api?";
         require APP . 'view/header.php';
         require APP . 'view/api/blur.php';
         require APP . 'view/footer.php';
     }
+
     public function resize(){
-        $url = "localhost/bachelor/api?";
+        $url = URL."api?";
         require APP . 'view/header.php';
         require APP . 'view/api/resize.php';
         require APP . 'view/footer.php';
     }
+
     public function brightness(){
-        $url = "localhost/bachelor/api?";
+        $url = URL."api?";
         require APP . 'view/header.php';
         require APP . 'view/api/brightness.php';
         require APP . 'view/footer.php';
     }
+
     public function contrast(){
-        $url = "localhost/bachelor/api?";
+        $url = URL."api?";
         require APP . 'view/header.php';
         require APP . 'view/api/contrast.php';
         require APP . 'view/footer.php';
     }
+    // legg til
     public function crop(){
-        $url = "localhost/bachelor/api?";
+        $url = URL."api?";
         require APP . 'view/header.php';
         require APP . 'view/api/crop.php';
+        require APP . 'view/footer.php';
+    }
+
+    public function flip(){
+        $url = URL."api?";
+        require APP . 'view/header.php';
+        require APP . 'view/api/flip.php';
+        require APP . 'view/footer.php';
+    }
+
+    public function gamma(){
+        $url = URL."api?";
+        require APP . 'view/header.php';
+        require APP . 'view/api/gamma.php';
+        require APP . 'view/footer.php';
+    }
+
+    public function greyscale(){
+        $url = URL."api?";
+        require APP . 'view/header.php';
+        require APP . 'view/api/greyscale.php';
+        require APP . 'view/footer.php';
+    }
+
+    public function invert(){
+        $url = URL."api?";
+        require APP . 'view/header.php';
+        require APP . 'view/api/invert.php';
+        require APP . 'view/footer.php';
+    }
+
+    public function pixelerate(){
+        $url = URL."api?";
+        require APP . 'view/header.php';
+        require APP . 'view/api/pixelerate.php';
+        require APP . 'view/footer.php';
+    }
+
+    public function rotate(){
+        $url = URL."api?";
+        require APP . 'view/header.php';
+        require APP . 'view/api/rotate.php';
+        require APP . 'view/footer.php';
+    }
+    
+    public function sharpen(){
+        $url = URL."api?";
+        require APP . 'view/header.php';
+        require APP . 'view/api/sharpen.php';
         require APP . 'view/footer.php';
     }
 }

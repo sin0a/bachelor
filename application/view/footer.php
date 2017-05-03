@@ -1,5 +1,6 @@
 
     <div class="footer">
+        <p>Dett er et bachelorprosjekt ved Høgskolen i Sørøst-Norge campus Bø</p>
     </div>
 
     <!-- jQuery, loaded in the recommended protocol-less way -->

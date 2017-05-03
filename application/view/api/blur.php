@@ -4,18 +4,23 @@
         <p>Denne funksjonen legger på et blur filter, det gjør bildet uklart</p>
         <br>
         <h2>Parameter</h2>
+        <br>
         <p><b>Verdi: </b>Et tall mellom 0 og 100.</p>
         <div class="kodequote">
-            <p><?= $url;?>/<b>blur=verdi</b></p>
+            <p><?= $url;?><b>blur=verdi</b></p>
         </div>
-        <div class="imagecontainer">
-            <div class="leftimage">
+        <div class="row">
+            <div class="col-md-4">
                 <p><b>Uten filter:</b></p>
-                <img src="<?='/bachelor/img/9862606.jpg'?>" style="margin-right: 20px;"/>
+                <div class="thumbnail">
+                    <img src="<?='/bachelor/img/9862606.jpg'?>"/>
+                </div>
             </div>
-            <div class="rightimage">
+            <div class="col-md-4">
                 <p><b>Med blur = 10:</b></p>
-                <img src="<?='/bachelor/img/6755623.jpg'?>"/>
+                <div class="thumbnail">
+                    <img src="<?='/bachelor/img/6755623.jpg'?>"/>
+                </div>
             </div>
         </div>
 

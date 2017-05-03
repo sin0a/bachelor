@@ -6,19 +6,25 @@
         <h2>Parameter</h2>
         <p><b>Verdi: </b>Et tall mellom -100 og 100. 0 betyr ingen forandring</p>
         <div class="kodequote">
-            <p><?= $url;?>/<b>brightness=verdi</b></p>
+            <p><?= $url;?><b>brightness=verdi</b></p>
         </div>
-        <div class="imagecontainer">
-            <div class="leftimage">
+        <div class="row">
+            <div class="col-md-4">
                 <p><b>Orginal:</b></p>
-                <img src="<?='/bachelor/img/9862606.jpg'?>" style="margin-right: 20px;"/>
+                <div class="thumbnail">
+                    <img src="<?='/bachelor/img/9862606.jpg'?>"/>
+                </div>
             
             <p><b>Med brightness = -40:</b></p>
-                <img src="<?='/bachelor/img/6652040.jpg'?>"/>
+                <div class="thumbnail">
+                    <img src="<?='/bachelor/img/6652040.jpg'?>"/>
                 </div>
-            <div class="rightimage">
+            </div>
+            <div class="col-md-4">
                 <p><b>Med brightness = 40:</b></p>
-                <img src="<?='/bachelor/img/3371084.jpg'?>"/>
+                <div class="thumbnail">
+                    <img src="<?='/bachelor/img/3371084.jpg'?>"/>
+                </div>
             </div>
             <br>
         </div>

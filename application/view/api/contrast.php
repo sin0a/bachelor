@@ -6,19 +6,24 @@
         <h2>Parameter</h2>
         <p><b>Verdi: </b>Et tall mellom -100 og 100.</p>
         <div class="kodequote">
-            <p><?= $url;?>/<b>contrast=verdi</b></p>
+            <p><?= $url;?><b>contrast=verdi</b></p>
         </div>
-      <div class="imagecontainer">
-            <div class="leftimage">
+      <div class="row">
+            <div class="col-md-4">
                 <p><b>Orginal:</b></p>
-                <img src="<?='/bachelor/img/6862193.jpg'?>" style="margin-right: 20px;"/>
-            
-            <p><b>Med contrast = -20:</b></p>
-                <img src="<?='/bachelor/img/7928924.jpg'?>"/>
+                <div class="thumbnail">
+                    <img src="<?='/bachelor/img/6862193.jpg'?>"/>
                 </div>
-            <div class="rightimage">
+            <p style="padding-top: 10px;"><b>Med contrast = -20:</b></p>
+                <div class="thumbnail">
+                    <img src="<?='/bachelor/img/7928924.jpg'?>"/>
+                </div>
+            </div>
+            <div class="col-md-4">
                 <p><b>Med brightness = 40:</b></p>
-                <img src="<?='/bachelor/img/7550493.jpg'?>"/>
+                <div class="thumbnail">
+                    <img src="<?='/bachelor/img/7550493.jpg'?>"/>
+                </div>
             </div>
             <br>
         </div>
