@@ -1,7 +1,7 @@
 <?php include "menu.php" ?>
     <div class="container" style="margin-left: 250px">
-        <h1>Flip - Inverterer et bilde</h1>
-        <p>Denne funksjonen inverterer et bilde vertikalt eller horisontalt</p>
+        <h1>Flip - Speiler et bilde</h1>
+        <p>Denne funksjonen speiler et bilde vertikalt eller horisontalt</p>
         <br>
         <h2>Parameter</h2>
         <p><b>Retning: </b>V eller H</p>

@@ -29,9 +29,9 @@ class ImageModel{
                 $newres--;
             }
             while($newres > 750);
-        $img->resize($newres, null, function ($constraint) {
-            $constraint->aspectRatio();
-        });
+            $img->resize($newres, null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
         }
        else{
             $newres = $width;
@@ -39,9 +39,9 @@ class ImageModel{
                 $newres--;
             }
             while($newres > 750);
-        $img->resize(null, $newres, function ($constraint) {
-            $constraint->aspectRatio();
-        });
+            $img->resize(null, $newres, function ($constraint) {
+                $constraint->aspectRatio();
+            });
         } 
         $img->encode('jpg',70);
         $img->save($path.'.jpg');
@@ -57,6 +57,11 @@ class ImageModel{
     public function forweb($id,$value){
         $img = Image::make($id);
         $img->encode('jpg',$value);
+    }
+    public function fit($id,$w,$h){
+        $img = Image::make($id);
+        $img->fit($w,$h);
+        $img->save($id);
     }
     public function backup($id,$path,$ext){
         $img = Image::make($id);

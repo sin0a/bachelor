@@ -133,6 +133,14 @@ class Api extends Controller
                 else
                     echo "Save for web krever en verdi mellom 0 og 100";
             }
+            if(isset($_GET["fit"])){
+                $fit = $_GET["fit"];
+                $res = explode(",", $fit);
+                if(is_numeric($res[0]) && is_numeric($res[1]))
+                    $model->fit($new,$res[0],$res[1]);
+                else
+                    echo "Fit krever en gyldig oppløsning";
+            }   
 
             $name = basename($new);
             echo $name;
@@ -237,6 +245,12 @@ class Api extends Controller
         $url = URL."api?";
         require APP . 'view/header.php';
         require APP . 'view/api/sfw.php';
+        require APP . 'view/footer.php';
+    }
+    public function fit(){
+        $url = URL."api?";
+        require APP . 'view/header.php';
+        require APP . 'view/api/fit.php';
         require APP . 'view/footer.php';
     }
 }

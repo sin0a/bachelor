@@ -6,7 +6,7 @@
         else {
             $active = "#";
         }
-        if(strpos($url,'api') == false)
+        if(strpos($nav,'api') == false)
             $home="active";
         else
             $home="#";
