@@ -14,6 +14,7 @@
                     <li class="content"><a href="brightness">Brightness()</a></li>
                     <li class="content"><a href="contrast">Contrast()</a></li>
                     <li class="content"><a href="crop">Crop()</a></li>
+                    <li class="content"><a href="encode">Encode()</a></li>
                     <li class="content"><a href="fit">Fit()</a></li>
                     <li class="content"><a href="flip">Flip()</a></li>
                     <li class="content"><a href="gamma">Gamma()</a></li>

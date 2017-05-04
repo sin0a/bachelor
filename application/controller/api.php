@@ -15,55 +15,55 @@
 
 
 
-class Api extends Controller
-{
+class Api extends Controller{
 
     public function index(){
         $model = $this->loadmodel('image');
         $api = $this->loadmodel('api');
-        $possible_url = array("resize", "roter","contrast","brightness","greyscale");
-        $returverdi = "En feil oppstod.";
-        $int = 0;
+        $feil = 0;
 
         // Henter bilde fra "path"
         if (isset($_GET["path"])) {
             // Laster opp bilde på serveren med uploadFromUrl() og setter den til $new
             $new = $api->uploadFromUrl();
-
             // Sjekker alle mulige parametere i URL
 
             // juster brightness
             if(isset($_GET["brightness"])){
                 if($_GET["brightness"] > -101 && $_GET["brightness"] < 101){
                     $api->brightness($new,$_GET["brightness"]);
-                } else
-                    echo "Lysstyrke trenger en verdi som er mellom -100 og +100: action=brightness&brightness=verdi";
+                } else{
+                    echo "Lysstyrke trenger en verdi som er mellom -100 og +100: brightness=verdi<br>";
+                    $feil = 1;
+                }
             }
      
             // juster kontrast
             if(isset($_GET["contrast"]))
-                if($_GET["contrast"] > -101 && $_GET["contrast"] < 101){
+                if(is_numeric($_GET["contrast"]) > -101 && $_GET["contrast"] < 101){
                     $api->contrast($new,$_GET["contrast"]);
-                } else 
-                    echo "Kontrast trenger en verdi som er mellom -100 og +100: action=contrast&contrast=verdi";
+                } else{
+                    echo "Kontrast trenger en verdi som er mellom -100 og +100: contrast=verdi<br>";
+                    $feil = 1;
+                }
             
             // resize
-            if(isset($_GET["width"])&& isset($_GET["height"])){
-
-             if(is_numeric($_GET["height"]) || is_numeric($_GET["width"])){
-                $int = 1;
-                
-                if($_GET["width"] == "auto"){
-                    $model->resizeHeight($new,$_GET["height"],90);
+            if(isset($_GET["resize"])){
+                $resize = $_GET["resize"];
+                $res = explode(",", $resize);
+                if(is_numeric($res[0]) && is_numeric($res[1])){
+                    $model->resize($new,$res[0],$res[1]);
                 }
-                if($_GET["height"] == "auto"){
-                    $model->resizeWidth($new,$_GET["width"],90);
+                else if(is_numeric($res[0]) && $res[1] == "auto"){
+                    $model->resizeHeight($new,$res[0],90);
                 }
-                else if (is_numeric($_GET["height"]) && is_numeric($_GET["width"]))
-                    $model->resize($new,$_GET["width"],$_GET["height"]);
-            }
-            else
-                echo "Resize krever følgende syntax: action=resize&width=bredde&height=høyde, width=bredde&height=auto eller width=auto&height=høyde";
+                else if(is_numeric($res[1]) && $res[0] == "auto"){
+                    $model->resizeWidth($new,$res[1],90);
+                }       
+                else{
+                    echo "Resize krever følgende syntax: resize=verdi,verdi eller resize=verdi,auto<br>";
+                    $feil = 1;
+                }
             }
             // Greyscale
             if(isset($_GET["greyscale"])){
@@ -73,52 +73,70 @@ class Api extends Controller
             if(isset($_GET["rotate"])){
                 if($_GET["rotate"] > -361 && $_GET["rotate"] < 361){
                     $model->roter($new,$_GET["rotate"]);
-                } else 
-                echo "Rotate krever følgende syntax: rotate=verdi Verdien representerer grader fra -360 til +360";
+                } else {
+                    echo "Rotate krever følgende syntax: rotate=verdi Verdien representerer grader fra -360 til +360<br>";
+                    $feil = 1;
+                }
             }
             // Opacity
             if(isset($_GET["opacity"])){
                 if($_GET["opacity"] > -1 && $_GET["opacity"] < 101){
                     $model->opacity($new,$_GET["opacity"]);
-                } else
-                echo "Opacity krever en verdi mellom 0 og 100";
+                } else{
+                    echo "Opacity krever en verdi mellom 0 og 100<br>";
+                    $feil = 1;
+                }
             }
 
             // Sharpen
-            if(isset($_GET["sharpen"]) && $_GET["sharpen"] > -1 && $_GET["sharpen"] < 101){
-                $model->sharpen($new,$_GET["sharpen"]);
-            }
-            else if(isset($_GET["sharpen"]) && $_GET["sharpen"] < -1 && $_GET["sharpen"] > 101){
-                echo "Sharpen krever en verdi mellom 0 og 100";
+            if(isset($_GET["sharpen"])){
+                if(is_numeric($_GET["sharpen"]) > -1 && $_GET["sharpen"] < 101){
+                    $model->sharpen($new,$_GET["sharpen"]);
+                }
+            else{
+                $feil = 1;
+                echo "Sharpen krever en verdi mellom 0 og 100<br>";
+                }
             }
 
             // Blur
             if(isset($_GET["blur"])){
-                if($_GET["blur"] > -1 && $_GET["blur"] < 101){
+                if(is_numeric($_GET["blur"]) > -1 && $_GET["blur"] < 101){
                     $model->blur($new,$_GET["blur"]);
-                } else
-                    echo "Blur krever en verdi mellom 0 og 100";
+                } else{
+                    echo "Blur krever en verdi mellom 0 og 100<br>";
+                    $feil = 1;
+                }
             }
 
             // Flip
             if(isset($_GET["flip"])){
 
-                if($_GET["flip"] == "v" || isset($_GET["flip"]) && $_GET["flip"] == "h"){
+                if($_GET["flip"] == "v" || $_GET["flip"] == "h"){
                     $model->flip($new,$_GET["flip"]);
-                }else
-                    echo "Flip tar bare to verdier: 'v' eller 'h'";
+                }else{
+                    $feil = 1;
+                    echo "Flip tar bare to verdier: 'v' eller 'h'<br>";
+                }
             }
             // Pixelerate
-            if(isset($_GET["pxl"]) && is_numeric($_GET["pxl"])){
-                $model->pixelerate($new,$_GET["pxl"]);
+            if(isset($_GET["pxl"])){
+                if(is_numeric($_GET["pxl"]) && $_GET["pxl"] < 101){
+                    $model->pixelerate($new,$_GET["pxl"]);
+                }
+                else{
+                    echo "Pxl krever en verdi mellom 0 og 100";
+                    $feil = 1;
+                }
             }
-
             // Gamma
             if(isset($_GET["gamma"])){
                 if(is_numeric($_GET["gamma"]) && $_GET["gamma"] > 0){
                     $model->gamma($new,$_GET["gamma"]);
-                }else
-                echo "Gamma må ha en positiv verdi mellom 0.1 og 30.0";
+                }
+                else{
+                    echo "Gamma må ha en positiv verdi mellom 0.1 og 30.0<br>";
+                }
             }
 
             // Invert
@@ -130,25 +148,72 @@ class Api extends Controller
             if(isset($_GET["sfw"])){
                 if(is_numeric($_GET["sfw"]) && $_GET["sfw"] > 0 && $_GET["sfw"] < 101)
                     $model->saveweb($new,$_GET["sfw"]);
-                else
-                    echo "Save for web krever en verdi mellom 0 og 100";
+                else{
+                    echo "Save for web krever en verdi mellom 0 og 100<br>";
+                    $feil = 1;
+                }
             }
             if(isset($_GET["fit"])){
                 $fit = $_GET["fit"];
                 $res = explode(",", $fit);
                 if(is_numeric($res[0]) && is_numeric($res[1]))
                     $model->fit($new,$res[0],$res[1]);
-                else
-                    echo "Fit krever en gyldig oppløsning";
-            }   
-
+                else{
+                    echo "Fit krever en gyldig oppløsning<br>";
+                    $feil = 1;
+                }
+            }
+            // konvertering av bilder
+            if(isset($_GET["encode"])){
+                // Henter array fra url
+                $encode = $_GET["encode"];
+                // Splitter stringen på , ;
+                $split =  explode(",", $encode);
+                // Fjerner filtype fra bilde
+                $utenExt = preg_replace('/\\.[^.\\s]{3,4}$/', '', $new);
+                // Henter basenavnet uten filtype
+                $navn = $utenExt;
+                // Sjekker at kvalitet er et tall mellom 0 og 100
+                if(is_numeric($split[1]) && $split[1] > -1 && $split[1] < 101){
+                    // Switch statement for hver filtype:
+                    switch($split[0]){
+                        case 'jpg':
+                            $model->encode($new,$navn,'jpg',$split[1]);
+                            break;
+                        case 'png':
+                            $model->encode($new,$navn,'png',$split[1]);
+                            break;
+                        case 'gif':
+                            $model->encode($new,$navn,'gif',$split[1]);
+                            $new = $utenExt.'.gif';
+                            break;
+                        case 'tif':
+                            $model->encode($new,$navn,'tif',$split[1]);
+                            break;
+                        case 'bmp':
+                            $model->encode($new,$navn,'bmp',$split[1]);
+                            $new = $utenExt.'.bmp';
+                            break;
+                        default:
+                            echo "Encode krever et gyldig filformat";
+                        }    
+                }
+                else{
+                    echo "Encode krever følgenede syntax: encode=format,kvalitet. Eks: encode=jpg,90";
+                    $feil = 1;
+                }
+            } 
             $name = basename($new);
-            echo $name;
+            //echo $name;
 
            
         }
-    	
-        require APP . 'view/api/index.php';
+    	if($feil == 0){
+            require APP . 'view/api/index.php';    
+        }
+        else
+            require APP . 'view/api/error.php';
+        
     }
     // Alle undersidene til /api/
 
@@ -162,6 +227,12 @@ class Api extends Controller
         $url = URL."api?";
         require APP . 'view/header.php';
         require APP . 'view/api/blur.php';
+        require APP . 'view/footer.php';
+    }
+    public function encode(){
+        $url = URL."api?";
+        require APP . 'view/header.php';
+        require APP . 'view/api/encode.php';
         require APP . 'view/footer.php';
     }
 

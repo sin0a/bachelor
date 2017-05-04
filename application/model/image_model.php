@@ -15,9 +15,42 @@ class ImageModel{
     *FORMAT skrives plain med fnutter. eks. 'png'
     *KVALITET rangeres fra 0-100.
     */
-    public function convert($id,$filnavn, $filtype, $kvalitet){
-        $type = $filtype;
-        $filtype = (string) Image::make($id)->encode($type, $kvalitet)->save($filnavn.'.'.$type);
+    public function encode($id,$filnavn, $filtype, $kvalitet){
+        $result = "";
+        $possible_type = array("gif", "png", "jpg");
+        if(in_array($filtype, $possible_type)){
+            $img = Image::make($id);
+            $img->encode($filtype, $kvalitet);
+            $img->save($filnavn.'.'.$filtype);
+        }
+        else{
+
+            $apikey = "1iNLiUsthKGjKhprUHHlmYt3QcH8FEt2W7kjVdbsE-DPkJPJcV3QAuVSGlgs27YirpHx7Hh0eHV61rMxnXsXhg";
+            $path = $id;
+            $utenExt = preg_replace('/\\.[^.\\s]{3,4}$/', '', $id);
+            $name = basename($utenExt);
+            $type = pathinfo($path, PATHINFO_EXTENSION);
+            $data = file_get_contents($path);
+            $base64 = "https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492_960_720.jpg";
+            $url = 'https://api.cloudconvert.com/convert';
+            $link = $url.'?apikey='.$apikey.'&inputformat='.$type.'&outputformat='.$filtype.'&input=download'.'&file='.$base64.'&wait=true'.'&download=inline';
+            /*$data = array('apikey' => $apikey, 'inputformat' => $type, 'outputformat' => $filtype,
+             'input' => 'base64', 'file' => $base64, 'filename' =>  $name, 'wait' => 'true', 'download' => 'inline');
+
+            $options = array(
+                'http' => array(
+                'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method'  => 'POST',
+                'content' => http_build_query($data)
+              )
+            );
+            $context  = stream_context_create($options);
+            $result = file_get_contents($url, false, $context);
+            if ($result === FALSE) {  }*/
+            $image = file_get_contents($link);
+            file_put_contents($utenExt.'.'.$filtype, $image);
+
+        }   
     }
     public function saveforweb($id,$path,$res,$filnavn){
         $img = Image::make($id);
@@ -33,7 +66,7 @@ class ImageModel{
                 $constraint->aspectRatio();
             });
         }
-       else{
+        else{
             $newres = $width;
             do{
                 $newres--;
