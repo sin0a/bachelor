@@ -1,3 +1,3 @@
 <div class="container">
-<img src="<?='/bachelor/img/'.$name?>" alt="asd" >
+<img src="<?='/img/'.$name?>" alt="asd" >
 </div> 

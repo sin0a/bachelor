@@ -12,17 +12,17 @@
             <div class="col-md-4">
                 <p><b>Orginal:</b></p>
                 <div class="thumbnail">
-                    <img src="<?='/bachelor/img/1142629.jpg'?>"/>
+                    <img src="<?='/img/1142629.jpg'?>"/>
                 </div>
             <p><b>Flip = h:</b></p>
             <div class="thumbnail">
-                <img src="<?='/bachelor/img/8402556.jpg'?>"/>
+                <img src="<?='/img/8402556.jpg'?>"/>
             </div>
                 </div>
             <div class="col-md-4">
                 <p><b>Flip = v:</b></p>
                 <div class="thumbnail">
-                    <img src="<?='/bachelor/img/3140962.jpg'?>"/>
+                    <img src="<?='/img/3140962.jpg'?>"/>
             </div>
             </div>
             <br>

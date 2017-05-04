@@ -10,13 +10,13 @@
             <div class="col-md-4">
                 <p><b>Uten filter:</b></p>
                 <div class="thumbnail">
-                    <img src="<?='/bachelor/img/9146006.jpg'?>"/>
+                    <img src="<?='/img/9146006.jpg'?>"/>
                 </div>
             </div>
             <div class="col-md-4">
                 <p><b>Med greyscale:</b></p>
                 <div class="thumbnail">
-                    <img src="<?='/bachelor/img/1332718.jpg'?>"/>
+                    <img src="<?='/img/1332718.jpg'?>"/>
                 </div>
             </div>
         </div>

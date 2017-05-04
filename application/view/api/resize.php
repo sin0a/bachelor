@@ -23,13 +23,13 @@
             <div class="col-md-4">
                 <p><b>Orginal: 300x193</b></p>
                 <div class="thumbnail">
-                    <img src="<?='/bachelor/img/9862606.jpg'?>"/>
+                    <img src="<?='/img/9862606.jpg'?>"/>
             </div>
             </div>
         <div class="col-md-4">
             <p><b>Etter resize: 250x161</b></p>
             <div class="thumbnail">
-                <img src="<?='/bachelor/img/5669583.jpg'?>"/>
+                <img src="<?='/img/5669583.jpg'?>"/>
             </div>
         </div>
     </div>

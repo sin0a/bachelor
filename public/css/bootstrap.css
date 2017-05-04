@@ -6787,6 +6787,7 @@ button.close {
     border: 1px solid #ddd;
     overflow: hidden;
     padding: 20px;
+    min-height: 617px;
 }
 .wrapper {
     overflow:hidden;

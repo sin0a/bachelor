@@ -13,13 +13,13 @@
             <div class="col-md-4">
                 <p><b>Uten filter:</b></p>
                 <div class="thumbnail">
-                    <img src="<?='/bachelor/img/9862606.jpg'?>"/>
+                    <img src="<?='/img/9862606.jpg'?>"/>
                 </div>
             </div>
             <div class="col-md-4">
                 <p><b>Med blur = 10:</b></p>
                 <div class="thumbnail">
-                    <img src="<?='/bachelor/img/6755623.jpg'?>"/>
+                    <img src="<?='/img/6755623.jpg'?>"/>
                 </div>
             </div>
         </div>

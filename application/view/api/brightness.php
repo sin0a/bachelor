@@ -12,18 +12,18 @@
             <div class="col-md-4">
                 <p><b>Orginal:</b></p>
                 <div class="thumbnail">
-                    <img src="<?='/bachelor/img/9862606.jpg'?>"/>
+                    <img src="<?='/img/9862606.jpg'?>"/>
                 </div>
             
             <p><b>Med brightness = -40:</b></p>
                 <div class="thumbnail">
-                    <img src="<?='/bachelor/img/6652040.jpg'?>"/>
+                    <img src="<?='/img/6652040.jpg'?>"/>
                 </div>
             </div>
             <div class="col-md-4">
                 <p><b>Med brightness = 40:</b></p>
                 <div class="thumbnail">
-                    <img src="<?='/bachelor/img/3371084.jpg'?>"/>
+                    <img src="<?='/img/3371084.jpg'?>"/>
                 </div>
             </div>
             <br>
