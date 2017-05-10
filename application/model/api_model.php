@@ -1,17 +1,16 @@
 <?php
  
  // include composer autoload
-    require '/../../../../vendor/autoload.php';
-
+    require 'C:\xampp\vendor\autoload.php';
     // importerer Intervention Image Manager Class
     use Intervention\Image\ImageManagerStatic as Image;
 
     class ApiModel
     {
 
-        public function uploadFromUrl(){
+        public function uploadFromUrl($file){
             // henter URL til bildet
-            $file = $_GET["path"];
+            //$file = $_GET["path"];
 
             // Henter bildet fra URL
             $data = file_get_contents($file, false, 
@@ -26,8 +25,8 @@
             for ($i = 0; $i < $length; $i++) {
                 $randomString .= $characters[rand(0, $charactersLength - 1)];
             }
-
-            $new = $target_dir.$randomString.'.jpg';
+            $type = pathinfo($file, PATHINFO_EXTENSION);
+            $new = $target_dir.$randomString.'.'.$type;
 
         // Legger til bildet på den nye filen
             file_put_contents($new, $data);

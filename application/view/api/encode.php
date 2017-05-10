@@ -11,39 +11,14 @@
         <br>
         <h2>Støttede formater:</h2>
         <ul class="list-group">
-            <li class="list-group-item">3fr</li class="list-group-item">
-            <li class="list-group-item">arw</li class="list-group-item">
-            <li class="list-group-item">bmp</li class="list-group-item">
-            <li class="list-group-item">cr2</li class="list-group-item">
-            <li class="list-group-item">crw</li class="list-group-item">
-            <li class="list-group-item">dcr</li class="list-group-item">
-            <li class="list-group-item">dng</li class="list-group-item">
-            <li class="list-group-item">eps</li class="list-group-item">
-            <li class="list-group-item">erf</li class="list-group-item">
-            <li class="list-group-item">gif</li class="list-group-item">
-            <li class="list-group-item">icns</li class="list-group-item">
-            <li class="list-group-item">ico</li class="list-group-item">
-            <li class="list-group-item">jpeg</li class="list-group-item">
-            <li class="list-group-item">mos</li class="list-group-item">
-            <li class="list-group-item">mrw</li class="list-group-item">
-            <li class="list-group-item">nef</li class="list-group-item">
-            <li class="list-group-item">odd</li class="list-group-item">
-            <li class="list-group-item">orf</li class="list-group-item">
-            <li class="list-group-item">pdf</li class="list-group-item">
-            <li class="list-group-item">pef</li class="list-group-item">
-            <li class="list-group-item">png</li class="list-group-item">
-            <li class="list-group-item">ppm</li class="list-group-item">
-            <li class="list-group-item">ps</li class="list-group-item">
-            <li class="list-group-item">psd</li class="list-group-item">
-            <li class="list-group-item">raf</li class="list-group-item">
-            <li class="list-group-item">raw</li class="list-group-item">
-            <li class="list-group-item">svg</li class="list-group-item">
-            <li class="list-group-item">svgz</li class="list-group-item">
-            <li class="list-group-item">tif</li class="list-group-item">
-            <li class="list-group-item">tiff</li class="list-group-item">
-            <li class="list-group-item">webp</li class="list-group-item">
-            <li class="list-group-item">x3f</li class="list-group-item">
-            <li class="list-group-item">xcf</li class="list-group-item">
-            <li class="list-group-item">xps</li class="list-group-item">
+            <li class="list-group-item">GD</li class="list-group-item">
+            <li class="list-group-item">GD2</li class="list-group-item">
+            <li class="list-group-item">GIF</li class="list-group-item">
+            <li class="list-group-item">JPEG</li class="list-group-item">
+            <li class="list-group-item">JPG</li class="list-group-item">
+            <li class="list-group-item">PNG</li class="list-group-item">
+            <li class="list-group-item">WBMP</li class="list-group-item">
+            <li class="list-group-item">WEBP</li class="list-group-item">
+            <li class="list-group-item">XBM</li class="list-group-item">
         </ul>
 </div>

@@ -5,8 +5,7 @@
  *
 */
 // include composer autoload
-    require '/../../../../vendor/autoload.php';
-
+    require 'C:\xampp\vendor\autoload.php';
 	// import the Intervention Image Manager Class
     use Intervention\Image\ImageManager;
 
@@ -23,25 +22,25 @@ class Upload extends Controller
     	require APP . 'view/header.php';
     	// image_model.php
     	$model = $this->loadModel('image');
-    	// henter filnavn fra formen i index.html
-    	$id = $model->getID();
     	//sletter filtypen fra en path. image.jpg->image
-    	$utenExt = preg_replace('/\\.[^.\\s]{3,4}$/', '', $id);
+    	/*$utenExt = preg_replace('/\\.[^.\\s]{3,4}$/', '', $id);
     	// legger til full path
     	$imgExt = $model->getPath($utenExt);
     	// lagrer full path til bildet
     	$img = $model->getPath($id);
     	// lagrer filtype
-    	$ext = pathinfo($id, PATHINFO_EXTENSION);
+    	$ext = pathinfo($id, PATHINFO_EXTENSION);*/
+        $navn = $model->generateRandomString(7);
     	// laster opp bildet på serveren
-    	$uploadOk = $model->uploadFile();
-    	// sjekker størrelsen
+    	$uploadOk = $model->uploadFile($navn);
+        $id = $uploadOk[1];
+    	/* sjekker størrelsen
     	$size = $model->getSize();
     	if($size < 50000){
     		$model->backup($img,$imgExt,$ext);
     		$model->resizeWidth($img,750,90);
     		//$model->convert($img,$imgExt,'GIF',5);
-    	}
+    	}*/
     	//test
     	//$gray = $model->greyscaletest($img,$imgExt,$ext);
     	// test pxl
@@ -52,17 +51,9 @@ class Upload extends Controller
     	//$model->brightness($gray,$i,$imgExt,$ext,'gray');
     	//}
     	// sjekker at opplastningen gikk greit
-    	if ($uploadOk == 1){
-    		//sjekker om brukeren ville konvertere bilde
-    		$konverter = $model->convertForm();
-    		if($konverter == 1){
-    			// henter formatet som skal brukes til konvertering
-    			$filType = $_POST['format'];
-    			$model->convert($img,$imgExt, $filType,90);
-    			$id = $utenExt.'.'.$filType;
-    		}
+    	if ($uploadOk[0] == 1){
     		// sender bruker videre til /image/"bildenavn"
-    		header('Location: ' .URL_PROTOCOL.URL_DOMAIN.'/bachelor/upload/image/'.$id);
+    		header('Location: ' .URL_PROTOCOL.URL_DOMAIN.'/upload/image/'.$id);
 			exit();
 
     	}
@@ -71,6 +62,17 @@ class Upload extends Controller
         	require APP . 'view/footer.php';
         }
     	
+    }
+    public function url(){
+        // image_model.php
+        $model = $this->loadmodel('image');
+        // api_model.php
+        $api = $this->loadmodel('api');
+        // Laster opp bildet på serveren
+        $img = $api->uploadFromUrl($_POST['urlToUpload']);
+        $id = $model->getID($img);
+        header('Location: ' .URL_PROTOCOL.URL_DOMAIN.'/upload/image/'.$id);
+        exit();
     }
     public function image($id){
     	// laster inn image_model.php
@@ -81,11 +83,9 @@ class Upload extends Controller
     	$ext = pathinfo($id, PATHINFO_EXTENSION);
     	// lagrer bildenavn
     	$utenExt = preg_replace('/\\.[^.\\s]{3,4}$/', '', $id);
-    	// senere
-    	$scalefile = $model->getPath($utenExt.'backup.'.$ext);
     	// henter bredde og høyde til bildet
-    	$height = $model->getHeight($scalefile);
-    	$width = $model->getWidth($scalefile);
+    	$height = $model->getHeight($img);
+    	$width = $model->getWidth($img);
     	
     	/* TEST OK: konverter*/
     	//$model->convert($img,$imgExt,'png',90);
@@ -135,8 +135,8 @@ class Upload extends Controller
         //$model->invert($img);
 
         /* TEST: crop*/
-        $feil = $model->crop($img,$width,$height,5,5);
-        echo $feil;
+        //$feil = $model->crop($img,$width,$height,5,5);
+        //echo $feil;
 
     	// skalering av bildet til vising, hvis bildet erover 500px bred
     	// eller høy, vill denne skalere ned bildet uten å endre det.

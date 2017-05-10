@@ -1,7 +1,6 @@
 <?php
     // include composer autoload
-    require '/../../../../vendor/autoload.php';
-
+    require 'C:\xampp\vendor\autoload.php';
     // importerer Intervention Image Manager Class
     use Intervention\Image\ImageManagerStatic as Image;
 
@@ -10,10 +9,9 @@
 class ImageModel{
 
     /* konverterer bildet til forskjellige formater
-    *FRA: JPG, PNG, GIF, TIF, BMP
-    *TIL: JPG, PNG, GIF, TIF, BMP
+    *FRA: JPG, PNG, GIF, JPEG, XBM, GD, GD2, WEBP
+    *TIL: JPG, PNG, GIF, JPEG, XBM, GD, GD2, WEBP
     *FORMAT skrives plain med fnutter. eks. 'png'
-    *KVALITET rangeres fra 0-100.
     */
     public function encode($id,$filnavn, $filtype, $kvalitet){
         $result = "";
@@ -24,33 +22,94 @@ class ImageModel{
             $img->save($filnavn.'.'.$filtype);
         }
         else{
-
-            $apikey = "1iNLiUsthKGjKhprUHHlmYt3QcH8FEt2W7kjVdbsE-DPkJPJcV3QAuVSGlgs27YirpHx7Hh0eHV61rMxnXsXhg";
-            $path = $id;
-            $utenExt = preg_replace('/\\.[^.\\s]{3,4}$/', '', $id);
-            $name = basename($utenExt);
-            $type = pathinfo($path, PATHINFO_EXTENSION);
-            $data = file_get_contents($path);
-            $base64 = "https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492_960_720.jpg";
-            $url = 'https://api.cloudconvert.com/convert';
-            $link = $url.'?apikey='.$apikey.'&inputformat='.$type.'&outputformat='.$filtype.'&input=download'.'&file='.$base64.'&wait=true'.'&download=inline';
-            /*$data = array('apikey' => $apikey, 'inputformat' => $type, 'outputformat' => $filtype,
-             'input' => 'base64', 'file' => $base64, 'filename' =>  $name, 'wait' => 'true', 'download' => 'inline');
-
-            $options = array(
-                'http' => array(
-                'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
-                'method'  => 'POST',
-                'content' => http_build_query($data)
-              )
-            );
-            $context  = stream_context_create($options);
-            $result = file_get_contents($url, false, $context);
-            if ($result === FALSE) {  }*/
-            $image = file_get_contents($link);
-            file_put_contents($utenExt.'.'.$filtype, $image);
-
+            switch ($filtype) {
+                case 'jpeg':
+                    $im = imagecreatefromstring(file_get_contents($id));
+                    $new = $filnavn.'.jpeg';
+                    imagejpeg($im, $new);
+                    break;
+                case 'xbm':
+                    $new = $filnavn.'.xbm';
+                    imagexbm(imagecreatefromstring(file_get_contents($id)), $new);
+                    break;
+                case 'wbmp':
+                    $new = $filnavn.'.wbmp';
+                    imagewbmp(imagecreatefromstring(file_get_contents($id)), $new);
+                    break;
+                case 'gd':
+                    $new = $filnavn.'.gd';
+                    imagegd(imagecreatefromstring(file_get_contents($id)), $new);
+                    break;
+                case 'gd2':
+                    $new = $filnavn.'.gd2';
+                    imagegd2(imagecreatefromstring(file_get_contents($id)), $new);
+                    break;
+                case 'webp':
+                    $new = $filnavn.'.webp';
+                    imagewebp(imagecreatefromstring(file_get_contents($id)), $new);
+                    break;
+                default:
+                    $result = "Formatet er ikke støttet";
+                    break;
+            }
+            
         }   
+    }
+    // Funksjon som sjekker formatet til filen som blir lastet opp
+    public function checkformat($id,$filtype,$filnavn){
+        $possible_type = array("gif", "png", "jpg");
+        $ischanged = 0;
+        // Hvis filtypen er støttet av intervention, returner ingenting
+        if(in_array($filtype, $possible_type)){
+            $new = $id;
+        }
+        // Hvis ikke
+        else {
+            $ischanged = 1;
+            $new = $filnavn.'.gif';
+            // Sjekker om filtypen er støttet, hvis den er støttet blir den midlertidig
+            // konvertert til GIF for å utføre videre endringer. Intervention kan bare 
+            // utføre operasjoner på GIF, JPG og PNG filer.
+            switch($filtype){
+                case 'webp':
+                    $im = imagecreatefromwebp($id);
+                    imagegif($im,$new,100);
+                    imagedestroy($im);
+                    break;
+                case 'jpeg':
+                    $im = imagecreatefromjpeg($id);
+                    imagegif($im,$new,100);
+                    imagedestroy($im);
+                    break;
+                case 'xbm':
+                    $im = imagecreatefromxbm($id);
+                    imagegif($im,$new,100);
+                    imagedestroy($im);
+                    break;
+                case 'wbmp':
+                    $im = imagecreatefromwbmp($id);
+                    imagegif($im,$new,100);
+                    imagedestroy($im);
+                    break;
+                case 'gd':
+                    $im = imagecreatefromgd($id);
+                    imagegif($im,$new,100);
+                    imagedestroy($im);
+                    break;
+                case 'gd2':
+                    $im = imagecreatefromgd2($id);
+                    imagegif($im,$new,100);
+                    imagedestroy($im);
+                    break;
+                case 'bmp':
+                    $im = imagecreatefromstring(file_get_contents($filnavn.'.bmp'));
+                    imagegif($im,$new,100);
+                    imagedestroy($im);
+                    break;
+            }
+            
+        }
+        return array($new,$ischanged);
     }
     public function saveforweb($id,$path,$res,$filnavn){
         $img = Image::make($id);
@@ -158,8 +217,8 @@ class ImageModel{
 
     // henter bildenavn fra en form i index.html
     // NOTE: kan bare brukes i upload/index. $FILES blir ikke lagret
-    public function getID(){
-        $id = basename($_FILES["fileToUpload"]["name"]);
+    public function getID($file){
+        $id = basename($file);
         return $id;
     }
     // henter størrelsen på bilde
@@ -318,7 +377,7 @@ class ImageModel{
         Image::make($id)->rotate($value)->save($id);
     }
     // laster opp bildet på server
-    public function uploadFile()
+    public function uploadFile($filename)
     {
 
         // hvor bildet skal lagres
@@ -335,6 +394,8 @@ class ImageModel{
 
         // Finner filtype
         $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+
+        $target_file = $target_dir. $filename.'.'.$imageFileType;
 
         // Sjekker om filen er et bilde. Filtypesjekk:
         echo "<div class='container'>";
@@ -364,14 +425,15 @@ class ImageModel{
         // Hvis alt er ok, prøver å laste opp bildet:
         } else {
             if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                echo "Filen ". basename( $_FILES["fileToUpload"]["name"]). " har blitt lastet opp.";
+                echo "Filen ". basename($target_file). " har blitt lastet opp.";
                 // Hvis noe gikk galt:
             } else {
                 echo "Det var et problem med å laste opp filen.";
             }
         }
+        $navn = basename($target_file);
         echo "</div>";
-        return $uploadOk;
+        return array($uploadOk,$navn);
     }
 
     public function convertForm(){
@@ -388,7 +450,7 @@ class ImageModel{
         return $img;
     }
     // genereret et tilfeldig tall som blir bildenavn
-    public function generateRandomString($length = 7) {
+    public function generateRandomString($length) {
         $characters = '0123456789';
         $charactersLength = strlen($characters);
         $randomString = '';

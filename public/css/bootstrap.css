@@ -6765,24 +6765,7 @@ button.close {
     color: #222;
     opacity: 0.1;
 }
-.navigation {
-    margin-left: 33px;
-}
-.navigation a {
-    display: inline-block;
-    padding: 10px 15px;
-    text-decoration: none;
-    font-size: 14px;
-    text-transform: uppercase;
-    font-weight: bold;
-    border: 2px solid #222;
-    background: #222;
-    color: #fff;
-}
-.navigation a:hover {
-    color: #222;
-    background: transparent;
-}
+
 .container {
     border: 1px solid #ddd;
     overflow: hidden;

@@ -12,14 +12,14 @@
             <div class="col-md-4">
                 <p><b>Uten filter:</b></p>
                 <div class="thumbnail">
-                    <img src="<?='/img/9801999.jpg'?>"/>
+                    <img src="<?='/img/site/9801999.jpg'?>"/>
                 </div>
             </div>
            
             <div class="col-md-4">
                 <p><b>Med sharpen = 15:</b></p>
                  <div class="thumbnail">
-                    <img src="<?='/img/7724892.jpg'?>"
+                    <img src="<?='/img/site/7724892.jpg'?>"
                 </div>
             </div>
         </div>

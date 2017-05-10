@@ -5,7 +5,7 @@
  *
 */
 // include composer autoload
-    require '/../../../../vendor/autoload.php';
+    require 'C:\xampp\vendor\autoload.php';
 
 	// import the Intervention Image Manager Class
     use Intervention\Image\ImageManager;
@@ -25,7 +25,13 @@ class Api extends Controller{
         // Henter bilde fra "path"
         if (isset($_GET["path"])) {
             // Laster opp bilde på serveren med uploadFromUrl() og setter den til $new
-            $new = $api->uploadFromUrl();
+            $new = $api->uploadFromUrl($_GET["path"]);
+            $utenExt = preg_replace('/\\.[^.\\s]{3,4}$/', '', $new);
+            $navn = basename($utenExt);
+            $type = pathinfo($new, PATHINFO_EXTENSION);
+            $checked = $model->checkformat($new,$type,$utenExt);
+            $new = $checked[0];
+            $ischanged = $checked[1];
             // Sjekker alle mulige parametere i URL
 
             // juster brightness
@@ -187,15 +193,34 @@ class Api extends Controller{
                             $model->encode($new,$navn,'gif',$split[1]);
                             $new = $utenExt.'.gif';
                             break;
-                        case 'tif':
-                            $model->encode($new,$navn,'tif',$split[1]);
+                        case 'wbmp':
+                            $model->encode($new,$navn,'wbmp',$split[1]);
+                            $new = $utenExt.'.wbmp';
                             break;
-                        case 'bmp':
-                            $model->encode($new,$navn,'bmp',$split[1]);
-                            $new = $utenExt.'.bmp';
+                        case 'xbm':
+                            $model->encode($new,$navn,'xbm',$split[1]);
+                            $new = $utenExt.'.xbm';
+                            break;
+                        case 'jpeg':
+                            $model->encode($new,$navn,'jpeg',$split[1]);
+                            $new = $utenExt.'.jpeg';
+                            break;
+                        case 'gd':
+                            $model->encode($new,$navn,'gd',$split[1]);
+                            $new = $utenExt.'.gd';
+                            break;
+                        case 'gd2':
+                            $model->encode($new,$navn,'gd2',$split[1]);
+                            $new = $utenExt.'.gd2';
+                            break;
+                        case 'webp':
+                            $model->encode($new,$navn,'webp',$split[1]);
+                            $new = $utenExt.'.webp';
                             break;
                         default:
                             echo "Encode krever et gyldig filformat";
+                            $feil = 1;
+                            break;
                         }    
                 }
                 else{

@@ -1,6 +1,6 @@
 
     <footer class="footer">
-        <p>Dett er et bachelorprosjekt ved Høgskolen i Sørøst-Norge campus Bø</p>
+        <p style="color: #ffffff;">Dett er et bachelorprosjekt ved Høgskolen i Sørøst-Norge campus Bø</p>
 
     <!-- jQuery, loaded in the recommended protocol-less way -->
     <!-- more http://www.paulirish.com/2010/the-protocol-relative-url/ -->
@@ -89,6 +89,12 @@
 
 
             });
+        $('#fileToUpload').change(function() {
+        $('#target').submit();
+        });
+        $('#urlToUpload').change(function() {
+        $('#url').submit();
+        });
       
 
     });
