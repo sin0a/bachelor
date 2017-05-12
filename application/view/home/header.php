@@ -24,7 +24,6 @@
         .navbar-default .navbar-nav > .active > a:hover,
         .navbar-default .navbar-nav > .active > a:focus {
             color: #555;
-            background-color: #141413;
         }
         input[type="text"]{   
             -webkit-transition: width 1s ease;  
@@ -36,15 +35,15 @@
         }  
 
         input[type="text"]:focus, textarea:focus {  
-            width: 210px;  
+            width: 160px;  
         }
     </style>
 </head>
 <body>
     <!-- navigation -->
-    <nav class="navbar navbar-default" style=" background-color: #000000; border-style: none;">
+    <nav class="navbar navbar-default" style=" background-color: #000000; border-style: none; border-radius: 0px;">
   <div class="container-fluid">
-    <div class="nav navbar-nav">
+    <div class="nav navbar-nav" style="border-style: none;">
          <ul class="nav navbar-nav">
       <li class="<?php echo $home?>"><a style="color: #ffffff" href="<?php echo URL; ?>">Hjem</a></li>
       <li class="<?php echo $active?>"><a style="color: #ffffff" href="<?php echo URL; ?>api/home">Api</a></li>

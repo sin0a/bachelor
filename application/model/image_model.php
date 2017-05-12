@@ -177,6 +177,10 @@ class ImageModel{
         $img = Image::make($id);
         $img->save($path.'backup.'.$ext);
     }
+    public function rewrite($id,$ext,$path){
+         $img = Image::make($id);
+         $img->save($path.'.'.$ext);
+    }
     public function greyscaletest($id,$path,$ext){
          $img = Image::make($id);
          $img->backup($id);

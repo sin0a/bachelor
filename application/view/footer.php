@@ -8,6 +8,24 @@
 
     <!-- define the project's URL (to make AJAX calls possible, even when using this in sub-folders etc) -->
     <script type="text/javascript">
+    function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
+
+    // Close the dropdown menu if the user clicks outside of it
+    window.onclick = function(event) {
+        if (!event.target.matches('.dropbtn')) {
+
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
 
     $(document).ready(
     function(){
@@ -89,16 +107,57 @@
 
 
             });
+        /* Funksjoner som åpner boksene, en for hver boks:*/
+        // Blur
+        $('#btnBlur').click(function(){
+        $('#blur').toggle();
+        });
+        // Sharpen
+        $('#btnSharpen').click(function(){
+        $('#sharpen').toggle();
+        });
+        // Greyscale
+        $('#btnGreyscale').click(function(){
+        $('#greyscale').toggle();
+        });
+        // Brightness
+        $('#btnBrightness').click(function(){
+        $('#brightness').toggle();
+        });
+        // Contrast
+        $('#btnContrast').click(function(){
+        $('#contrast').toggle();
+        });
+        // Encode
+        $('#btnEncode').click(function(){
+        $('#encode').toggle();
+        });
+        // Fit
+        $('#btnFit').click(function(){
+        $('#fit').toggle();
+        });
+        // Select file i index.php
         $('#fileToUpload').change(function() {
-        $('#go').show();
+        $('#go').toggle();
+        $('#choose').hide();
         });
+        // Url i index.php
         $('#urlToUpload').change(function() {
-        $('#go').show();
+        $('#goUrl').show();
         });
-        $('#urlToUpload').blur(function() {
-            if(!$.trim(this.value).length) { // zero-length string AFTER a trim
-                $('#go').hide();
-            }
+        // Zoom
+        $('#btnZoomIn').click(function(){
+        $('#img1').hide();
+        $('#btnZoomIn').hide();
+        $('#btnZoomOut').show();
+        $('#img2').show();
+        });
+        // Zoom
+        $('#btnZoomOut').click(function(){
+        $('#img2').hide();
+        $('#btnZoomOut').hide();
+        $('#btnZoomIn').show();
+        $('#img1').show();
         });
 
     });

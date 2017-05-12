@@ -188,6 +188,7 @@ class Api extends Controller{
                             break;
                         case 'png':
                             $model->encode($new,$navn,'png',$split[1]);
+                            echo $navn;
                             break;
                         case 'gif':
                             $model->encode($new,$navn,'gif',$split[1]);

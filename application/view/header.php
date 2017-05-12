@@ -17,22 +17,39 @@
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- JS -->
-    <!-- please note: The JavaScript files are loaded in the footer to speed up page construction -->
-    <!-- See more here: http://stackoverflow.com/q/2105327/1114320 -->
-
     <!-- CSS -->
     <link href="<?php echo URL; ?>css/bootstrap.css" rel="stylesheet">
+    <!-- Google material Design Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+    <style>
+        .navbar-default .navbar-nav > .active > a,
+        .navbar-default .navbar-nav > .active > a:hover,
+        .navbar-default .navbar-nav > .active > a:focus {
+            color: #555;
+        }
+        input[type="text"]{   
+            -webkit-transition: width 1s ease;  
+            -moz-transition: width 1s ease;  
+            -o-transition: width 1s ease;  
+            -ms-transition: width 1s ease;  
+            transition: width 1s ease;  
+            width: 100px;
+        }  
+
+        input[type="text"]:focus, textarea:focus {  
+            width: 210px;  
+        }
+    </style>
 </head>
 <body>
     <!-- navigation -->
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default" style=" background-color: #000000; border-style: none; border-radius: 0px;">
   <div class="container-fluid">
-    <div class="nav navbar-nav">
+    <div class="nav navbar-nav" style="border-style: none;">
          <ul class="nav navbar-nav">
-      <li class="<?php echo $home?>"><a href="<?php echo URL; ?>">Hjem</a></li>
-      <li class="<?php echo $active?>"><a href="<?php echo URL; ?>api/home">Api</a></li>
+      <li class="<?php echo $home?>"><a style="color: #ffffff" href="<?php echo URL; ?>">Hjem</a></li>
+      <li class="<?php echo $active?>"><a style="color: #ffffff" href="<?php echo URL; ?>api/home">Api</a></li>
     </div>
 </div>
 </nav>

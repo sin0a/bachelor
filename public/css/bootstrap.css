@@ -4520,13 +4520,13 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
   color: #555;
-  background-color: #e7e7e7;
+  background-color: #2f2f30;
 }
 .navbar-default .navbar-nav > .disabled > a,
 .navbar-default .navbar-nav > .disabled > a:hover,
 .navbar-default .navbar-nav > .disabled > a:focus {
-  color: #ccc;
-  background-color: transparent;
+ color: #555;
+  background-color: #3f4144;
 }
 .navbar-default .navbar-toggle {
   border-color: #ddd;
@@ -4561,7 +4561,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
   .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
     color: #555;
-    background-color: #e7e7e7;
+    background-color: #5bc0de;
   }
   .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a,
   .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a:hover,
@@ -6813,12 +6813,10 @@ button.close {
     margin-top: 30px;
 }
 .container input {
-    background-color: #f5f5f5;
     border: 0;
     padding: 5px 10px;
 }
 .container input[type="submit"] {
-    background-color: #ccc;
     cursor: pointer;
 }
 ul.list {
@@ -6873,5 +6871,27 @@ li.content a{
 .footer a {
     color: #454545;
 }
+.ButtonClicked {
+}
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
 
 /*# sourceMappingURL=bootstrap.css.map */
