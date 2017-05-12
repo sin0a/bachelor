@@ -14,18 +14,29 @@ class ImageModel{
     *FORMAT skrives plain med fnutter. eks. 'png'
     */
     public function encode($id,$filnavn, $filtype, $kvalitet){
+        // resultatvariabel til eventuell feilmelding;
         $result = "";
-        $possible_type = array("gif", "png", "jpg");
+        // Liste over filtyper som er godkjent av image intervention
+        $possible_type = array("gif", "png", "jpg","jpeg");
+        // Skjekker om formatet er godkjent
         if(in_array($filtype, $possible_type)){
+            // Lager bldeinstanse
             $img = Image::make($id);
+            // Konverterer bilde til gitt format
             $img->encode($filtype, $kvalitet);
+            // Lagrer nytt bilde
             $img->save($filnavn.'.'.$filtype);
         }
+        // Hvis filformatet er ikke godkjent av intervention:
         else{
+            // sortering etter gitt filtype av brukeren
             switch ($filtype) {
                 case 'jpeg':
+                    // lager et nytt bildeobjekt av URL til bilde på serveren
                     $im = imagecreatefromstring(file_get_contents($id));
+                    // lager en ny fil
                     $new = $filnavn.'.jpeg';
+                    // konverterer bilde til jpeg og lager det på ny fil
                     imagejpeg($im, $new);
                     break;
                 case 'xbm':
@@ -48,16 +59,21 @@ class ImageModel{
                     $new = $filnavn.'.webp';
                     imagewebp(imagecreatefromstring(file_get_contents($id)), $new);
                     break;
+                // hvis filtypen ikke er i switch:
                 default:
                     $result = "Formatet er ikke støttet";
                     break;
             }
             
-        }   
+        }
+        // returnerer feilmelding
+        return $result;   
     }
     // Funksjon som sjekker formatet til filen som blir lastet opp
+    // Intervention kan bare håndere PNG, GIF og jpg
+    // Denne funkksjonen vil da konverere filen til et godkjent format før prossesering
     public function checkformat($id,$filtype,$filnavn){
-        $possible_type = array("gif", "png", "jpg");
+        $possible_type = array("gif", "png", "jpg","jpeg");
         $ischanged = 0;
         // Hvis filtypen er støttet av intervention, returner ingenting
         if(in_array($filtype, $possible_type)){
@@ -109,6 +125,7 @@ class ImageModel{
             }
             
         }
+        // returnerer konvertert bilde og om filen har blitt konvertert
         return array($new,$ischanged);
     }
     public function saveforweb($id,$path,$res,$filnavn){
@@ -155,6 +172,7 @@ class ImageModel{
         $img->fit($w,$h);
         $img->save($id);
     }
+    // lager en backup fil til reset funksjon:
     public function backup($id,$path,$ext){
         $img = Image::make($id);
         $img->save($path.'backup.'.$ext);
@@ -451,12 +469,18 @@ class ImageModel{
     }
     // genereret et tilfeldig tall som blir bildenavn
     public function generateRandomString($length) {
+        // verdier som brukes
         $characters = '0123456789';
+        // lengden på stringen
         $charactersLength = strlen($characters);
+        // deklarerer stringen
         $randomString = '';
+        // Utfører operasjonen $length ganger
         for ($i = 0; $i < $length; $i++) {
+            // velger et tilfeldig tall
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
+    // returnerer et tall på $length lengde
     return $randomString;
     }
 }

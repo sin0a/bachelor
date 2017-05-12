@@ -20,17 +20,29 @@
     <!-- CSS -->
     <link href="<?php echo URL; ?>css/bootstrap.css" rel="stylesheet">
     <style>
-    .navbar-default .navbar-nav > .active > a,
-    .navbar-default .navbar-nav > .active > a:hover,
-    .navbar-default .navbar-nav > .active > a:focus {
-  color: #555;
-  background-color: #141413;
-}
+        .navbar-default .navbar-nav > .active > a,
+        .navbar-default .navbar-nav > .active > a:hover,
+        .navbar-default .navbar-nav > .active > a:focus {
+            color: #555;
+            background-color: #141413;
+        }
+        input[type="text"]{   
+            -webkit-transition: width 1s ease;  
+            -moz-transition: width 1s ease;  
+            -o-transition: width 1s ease;  
+            -ms-transition: width 1s ease;  
+            transition: width 1s ease;  
+            width: 100px;
+        }  
+
+        input[type="text"]:focus, textarea:focus {  
+            width: 210px;  
+        }
     </style>
 </head>
 <body>
     <!-- navigation -->
-    <nav class="navbar navbar-default" style="opacity: 0.9; background-color: #000000; border-style: none;">
+    <nav class="navbar navbar-default" style=" background-color: #000000; border-style: none;">
   <div class="container-fluid">
     <div class="nav navbar-nav">
          <ul class="nav navbar-nav">

@@ -46,7 +46,7 @@ class Api extends Controller{
      
             // juster kontrast
             if(isset($_GET["contrast"]))
-                if(is_numeric($_GET["contrast"]) > -101 && $_GET["contrast"] < 101){
+                if($_GET["contrast"] > -101 && $_GET["contrast"] < 101){
                     $api->contrast($new,$_GET["contrast"]);
                 } else{
                     echo "Kontrast trenger en verdi som er mellom -100 og +100: contrast=verdi<br>";

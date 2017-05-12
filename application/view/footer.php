@@ -90,12 +90,16 @@
 
             });
         $('#fileToUpload').change(function() {
-        $('#target').submit();
+        $('#go').show();
         });
         $('#urlToUpload').change(function() {
-        $('#url').submit();
+        $('#go').show();
         });
-      
+        $('#urlToUpload').blur(function() {
+            if(!$.trim(this.value).length) { // zero-length string AFTER a trim
+                $('#go').hide();
+            }
+        });
 
     });
 
