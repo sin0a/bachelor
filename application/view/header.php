@@ -49,7 +49,7 @@
     <div class="nav navbar-nav" style="border-style: none;">
          <ul class="nav navbar-nav">
       <li class="<?php echo $home?>"><a style="color: #ffffff" href="<?php echo URL; ?>">Hjem</a></li>
-      <li class="<?php echo $active?>"><a style="color: #ffffff" href="<?php echo URL; ?>api/home">Api</a></li>
+      <li class="<?php echo $active?>"><a style="color: #ffffff" href="<?php echo URL; ?>api/oppstart">Api</a></li>
     </div>
 </div>
 </nav>

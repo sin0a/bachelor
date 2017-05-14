@@ -33,6 +33,9 @@
         $('#btnBlur').click(function(){
         $('#blur').toggle();
         });
+        $('#btnExecute').click(function(){
+        $('#execute').toggle();
+        });
         // Sharpen
         $('#btnSharpen').click(function(){
         $('#sharpen').toggle();
@@ -176,8 +179,8 @@
         });
         // Form
         $("#btnSubmit").click(function() {
-           $("#editform").submit();
-       });
+        $("#editform").submit();
+        });
 
     });
 

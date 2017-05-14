@@ -86,7 +86,7 @@ class Api extends Controller{
             }
             // Opacity
             if(isset($_GET["opacity"])){
-                if($_GET["opacity"] > -1 && $_GET["opacity"] < 101){
+                if($_GET["opacity"] > 0 && $_GET["opacity"] < 101){
                     $model->opacity($new,$_GET["opacity"]);
                 } else{
                     echo "Opacity krever en verdi mellom 0 og 100<br>";
@@ -96,7 +96,7 @@ class Api extends Controller{
 
             // Sharpen
             if(isset($_GET["sharpen"])){
-                if(is_numeric($_GET["sharpen"]) > -1 && $_GET["sharpen"] < 101){
+                if(is_numeric($_GET["sharpen"]) > 0 && $_GET["sharpen"] < 101){
                     $model->sharpen($new,$_GET["sharpen"]);
                 }
             else{
@@ -107,10 +107,10 @@ class Api extends Controller{
 
             // Blur
             if(isset($_GET["blur"])){
-                if(is_numeric($_GET["blur"]) > -1 && $_GET["blur"] < 101){
+                if(is_numeric($_GET["blur"]) > 0 && $_GET["blur"] < 101){
                     $model->blur($new,$_GET["blur"]);
                 } else{
-                    echo "Blur krever en verdi mellom 0 og 100<br>";
+                    echo "Blur krever en verdi mellom 1 og 100<br>";
                     $feil = 1;
                 }
             }
@@ -250,104 +250,121 @@ class Api extends Controller{
     }
 
     public function blur(){
-        $url = URL."api?";
+        $url = 'http:'.URL."api?";
         require APP . 'view/header.php';
         require APP . 'view/api/blur.php';
         require APP . 'view/footer.php';
     }
     public function encode(){
-        $url = URL."api?";
+        $url = 'http:'.URL."api?";
         require APP . 'view/header.php';
         require APP . 'view/api/encode.php';
         require APP . 'view/footer.php';
     }
 
     public function resize(){
-        $url = URL."api?";
+        $url = 'http:'.URL."api?";
         require APP . 'view/header.php';
         require APP . 'view/api/resize.php';
         require APP . 'view/footer.php';
     }
 
     public function brightness(){
-        $url = URL."api?";
+        $url = 'http:'.URL."api?";
         require APP . 'view/header.php';
         require APP . 'view/api/brightness.php';
         require APP . 'view/footer.php';
     }
 
     public function contrast(){
-        $url = URL."api?";
+        $url = 'http:'.URL."api?";
         require APP . 'view/header.php';
         require APP . 'view/api/contrast.php';
         require APP . 'view/footer.php';
     }
     // legg til
     public function crop(){
-        $url = URL."api?";
+        $url = 'http:'.URL."api?";
         require APP . 'view/header.php';
         require APP . 'view/api/crop.php';
         require APP . 'view/footer.php';
     }
 
     public function flip(){
-        $url = URL."api?";
+        $url = 'http:'.URL."api?";
         require APP . 'view/header.php';
         require APP . 'view/api/flip.php';
         require APP . 'view/footer.php';
     }
 
     public function gamma(){
-        $url = URL."api?";
+        $url = 'http:'.URL."api?";
         require APP . 'view/header.php';
         require APP . 'view/api/gamma.php';
         require APP . 'view/footer.php';
     }
 
     public function greyscale(){
-        $url = URL."api?";
+        $url = 'http:'.URL."api?";
         require APP . 'view/header.php';
         require APP . 'view/api/greyscale.php';
         require APP . 'view/footer.php';
     }
 
     public function invert(){
-        $url = URL."api?";
+        $url = 'http:'.URL."api?";
         require APP . 'view/header.php';
         require APP . 'view/api/invert.php';
         require APP . 'view/footer.php';
     }
 
     public function pixelerate(){
-        $url = URL."api?";
+        $url = 'http:'.URL."api?";
         require APP . 'view/header.php';
         require APP . 'view/api/pixelerate.php';
         require APP . 'view/footer.php';
     }
 
     public function rotate(){
-        $url = URL."api?";
+        $url = 'http:'.URL."api?";
         require APP . 'view/header.php';
         require APP . 'view/api/rotate.php';
         require APP . 'view/footer.php';
     }
     
     public function sharpen(){
-        $url = URL."api?";
+        $url = 'http:'.URL."api?";
         require APP . 'view/header.php';
         require APP . 'view/api/sharpen.php';
         require APP . 'view/footer.php';
     }
     public function sfw(){
-        $url = URL."api?";
+        $url = 'http:'.URL."api?";
         require APP . 'view/header.php';
         require APP . 'view/api/sfw.php';
         require APP . 'view/footer.php';
     }
     public function fit(){
-        $url = URL."api?";
+        $url = 'http:'.URL."api?";
         require APP . 'view/header.php';
         require APP . 'view/api/fit.php';
+        require APP . 'view/footer.php';
+    }
+    public function oppstart(){
+        $url = 'http:'.URL."api?";
+        require APP . 'view/header.php';
+        require APP . 'view/api/oppstart.php';
+        require APP . 'view/footer.php';
+    }
+     public function lenke(){
+        $url = 'http:'.URL."api?";
+        require APP . 'view/header.php';
+        require APP . 'view/api/lenker.php';
+        require APP . 'view/footer.php';
+    }
+    public function handler(){
+        require APP . 'view/header.php';
+        require APP . 'view/api/handler.php';
         require APP . 'view/footer.php';
     }
 }

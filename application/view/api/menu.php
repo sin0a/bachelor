@@ -3,9 +3,8 @@
         <div class="well" style="width:225px; padding: 8px 0;">
             <ul class="list">
                     <li class="title">Oppstart</li>
-                    <li class="content"><a href="">How to</a></li>
-                    <li class="content"><a href="">Bygge lenker</a></li>
-                    <li class="content"><a href="">Eksempelkode</a></li>
+                    <li class="content"><a href="oppstart">Oppstart</a></li>
+                    <li class="content"><a href="lenke">Bygge lenker</a></li>
         </ul>
         <br>
         <ul class="list">
