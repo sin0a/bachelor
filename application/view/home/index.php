@@ -1,5 +1,5 @@
 </body>
-<body style="background-image: url(/public/img/7509976.jpeg); -webkit-background-size: cover;
+<body style="background-image: url(/public/img/site/7509976.jpeg); -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover; overflow-x: hidden; 
@@ -9,7 +9,7 @@
         <br>
         <div class="container-fluid" style="max-width: 750px;">
         <form id ="target" action="<?=URL_PROTOCOL.URL_DOMAIN.'/upload/' ?>" method="post" enctype="multipart/form-data">
-            <div class="col-6 col-lg-4" style="margin-left: 100px;   background: rgba(0,0,0,0.5); min-height: 150px; min-width: 150px; border-radius: 25px;">
+            <div class="col-6 col-lg-4" style="margin-left: 100px;  background: rgba(0,0,0,0.5); min-height: 150px; min-width: 150px; border-radius: 25px;">
             
                 <h2 style="color: #ffffff; text-align: center;">Select a file</h2><br>
                 <input type="submit" class="btn btn-success" id="go" value="Go!" style="margin-left: 35%; font-size: 20px; display: none;">

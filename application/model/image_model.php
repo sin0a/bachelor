@@ -190,13 +190,11 @@ class ImageModel{
          return $path.'grey.'.$ext;
     }
     // justerer lysstyrke på bildet.
-    public function brightness($id, $value, $path, $ext,$name){
+    public function brightness($id, $value){
         $img = Image::make($id);
-        $img->backup($id);
         //-100 er MIN +100 er MAX
         $img->brightness($value);
-        $img->save($path.$name.$value.'.'.$ext,60);
-        $img->reset($id);
+        $img->save($id);
     }
     // justering av kontrasten på bildet
     public function contrast($id, $value){
@@ -360,39 +358,22 @@ class ImageModel{
      // endrer høyden på bildet, genererer bredden automatisk
     // etter aspect ratio:
     public function resizeHeight($id, $height){
-         // create an image manager instance with favored driver
-        Image::configure(array('driver' => 'gd'));
         $img = Image::make($id);
         $img->resize(null, $height, function ($constraint) {
             $constraint->aspectRatio();
          });
         $img->save($id);
-
     }
      // endrer bredden på bildet, genererer høyden automatisk
     // etter aspect ratio:
-    public function resizeWidth($id, $width,$quality){
-         // create an image manager instance with favored driver
-        Image::configure(array('driver' => 'gd'));
+    public function resizeWidth($id, $width){
         $img = Image::make($id);
         $img->resize($width, null, function ($constraint) {
             $constraint->aspectRatio();
          });
-        $img->save($id,$quality);
-
+        $img->save($id);
     }
 
-    // roterer bildet 90 grader til venstre
-    public function roterLeft($id){
-        Image::configure(array('driver' => 'gd'));
-        Image::make($id)->rotate(+90)->save($id);
-    }
-
-    // roterer bildet 90 grader til høre
-     public function roterRight($id){
-        Image::configure(array('driver' => 'gd'));
-        Image::make($id)->rotate(-90)->save($id);
-    }
     // roterer bildet med brukeren sin verdi. $value = grader
     public function roter($id,$value){
         Image::configure(array('driver' => 'gd'));

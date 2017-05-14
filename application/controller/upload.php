@@ -7,10 +7,10 @@
 // include composer autoload
     require 'C:\xampp\vendor\autoload.php';
 	// import the Intervention Image Manager Class
-    use Intervention\Image\ImageManager;
+    use Intervention\Image\ImageManager as Image;;
 
     // create an image manager instance with favored driver
-    $manager = new ImageManager(array('driver' => 'imagick'));
+    //$manager = new ImageManager(array('driver' => 'imagick'));
 
 
 class Upload extends Controller
@@ -73,157 +73,166 @@ class Upload extends Controller
     	$imgExt = $model->getPath($utenExt);
         $navn = basename($utenExt);
         // henter bredde
-    	$w = $model->getWidth($img);
-        // henter høyde
-        $h = $model->getHeight($img);
-        // Variabel til zoom funksjon
-        if($w > $h){
-            $zoom = $w/4 + $w;
-            $value = $model->scaleHeight($img,$zoom);
-            $w1 = $value[0];
-            $h1 = $value[1];  
-        }
-        else if($h > $w){
-          $zoom = $h/2 + $h;
-          $value = $model->scaleWidth($img,$zoom);
-          $w1 = $value[0];
-          $h1 = $value[1];
-        }
-        else{
-          $zoom = $h/2 + $h;
-          $value = $model->scaleWidth($img,$zoom);
-          $w1 = $value[0];
-          $h1 = $value[1]; 
-        }
+        $possible_type = array("gif", "png", "jpg","jpeg");
+        $ischanged = 0;
+        // Hvis filtypen er støttet av intervention, returner ingenting
+        if(in_array($ext, $possible_type)){
         
-    	/* TEST OK: konverter*/
-          if(isset($_POST["encode"])){
-            // Henter verdi fra form
-            $encode = $_POST["encode"];
-            // legger til full path på navn
-            $name = $model->getPath($navn);
-            // Sjekker om verdien fra formen er tom
-            if(strlen($encode) != 0){
-                // konverterer
-                $result = $model->encode($img,$name,$_POST["format"],$encode);
-                // laster inn bilde på nytt
-                $id = basename($utenExt).'.'.$_POST["format"];
-                // redirecter til riktig side
-                header('Location: ' .URL_PROTOCOL.URL_DOMAIN.'/upload/image/'.$id);
-                exit();
+        	$w = $model->getWidth($img);
+            // henter høyde
+            $h = $model->getHeight($img);
+            
+        	/* TEST OK: konverter*/
+            if(isset($_POST["encode"])){
+                // Henter verdi fra form
+                $encode = $_POST["encode"];
+                // legger til full path på navn
+                $name = $model->getPath($navn);
+                // Sjekker om verdien fra formen er tom
+                if(strlen($encode) != 0){
+                    // konverterer
+                    $result = $model->encode($img,$name,$_POST["format"],$encode);
+                    // laster inn bilde på nytt
+                    $id = basename($utenExt).'.'.$_POST["format"];
+                    // redirecter til riktig side
+                    header('Location: ' .URL_PROTOCOL.URL_DOMAIN.'/upload/image/'.$id);
+                    exit();
+                }
+            }
+        	/* TEST OK: kontrast*/
+            if(isset($_POST["contrast"])){
+                $contrast = $_POST["contrast"];
+                if(strlen($contrast) != 0){
+                    $model->contrast($img,$contrast);
+                    $id = basename($img);
+                }
+            }
+            /* Fit */
+            if(isset($_POST["fitb"]) && isset($_POST["fith"])){
+                $fitb = $_POST["fitb"];
+                $fith = $_POST["fith"];
+                if(strlen($fitb) != 0 && strlen($fith) != 0){
+                    $model->fit($img,$fitb,$fith);
+                    $id = basename($img);
+                }
+            }
+
+        	/* TEST OK: pixelerate*/
+             if(isset($_POST["pixelerate"])){
+                $pixelerate = $_POST["pixelerate"];
+                if(strlen($pixelerate) != 0){
+                    $model->pixelerate($img,$pixelerate);
+                    $id = basename($img);
+                }
+            }
+        	
+        	/* TEST OK: brightness*/
+            if(isset($_POST["brightness"])){
+                $brightness = $_POST["brightness"];
+                if(strlen($brightness) != 0){
+                    $model->brightness($img,$brightness);
+                    $id = basename($img);
+                }
+            }
+            /* TEST OK: Rotate*/
+            if(isset($_POST["rotate"])){
+                $rotate = $_POST["rotate"];
+                if(strlen($rotate) != 0 && $rotate > -366 && $rotate < 366){
+                    $model->roter($img,$rotate);
+                    $id = basename($img);
+                }
+            }
+        	
+        	/* TEST OK:  filter grayscale. */
+            if(isset($_POST["greyscale"]) && $_POST["greyscale"] == 1){
+                $greyscale = $_POST["greyscale"];
+                    $model->greyscale($img);
+                    $id = basename($img);
+            }
+            /* TEST OK:  filter invert. */
+            if(isset($_POST["invert"]) && $_POST["invert"] == 1){
+                $invert = $_POST["invert"];
+                    $model->invert($img);
+                    $id = basename($img);
+            }
+
+        	/* TEST OK: resize*/
+            if(isset($_POST["width"]) && isset($_POST["height"]) && strlen($_POST["width"]) != 0 && strlen($_POST["height"]) != 0){
+                $width = $_POST["width"];
+                $height = $_POST["height"];
+                $auto = "auto";    
+                if($height == $auto){
+                    $model->resizeWidth($img,$width);
+                      // henter bredde
+                    $w = $model->getWidth($img);
+                    // henter høyde
+                    $h = $model->getHeight($img);
+                }
+                else if($width == $auto){
+                    $feil = $model->resizeHeight($img,$height);
+                    // henter bredde
+                    $w = $model->getWidth($img);
+                    echo $feil;
+                    // henter høyde
+                    $h = $model->getHeight($img);
+                }
+                else{
+                    $model->resize($img,$width,$height);
+                      // henter bredde
+                    $w = $model->getWidth($img);
+                    // henter høyde
+                    $h = $model->getHeight($img);
+                }       
+                
+            }
+
+            /* TEST OK: sharpen */
+            if(isset($_POST["sharpen"])){
+                $sharpen = $_POST["sharpen"];
+                if(strlen($sharpen) != 0){
+                    $model->sharpen($img,$sharpen);
+                    $id = basename($img);
+                }
+            }
+
+            /* Blur */
+            if(isset($_POST["blur"])){
+                $blur = $_POST["blur"];
+                if(strlen($blur) != 0){
+                    $model->blur($img,$blur);
+                    $id = basename($img);
+                }
+            }
+
+        	/* TEST ERROR: TIMEOUT
+        	$model->opacity($img,50); */
+
+            /* TEST OK: flip */
+            if(isset($_POST["flip"])){
+                if($_POST["flip"] == "v" || $_POST["flip"] == "h"){
+                    $flip = $_POST["flip"];
+                    if(strlen($flip) != 0){
+                        $model->flip($img,$flip);
+                        $id = basename($img);
+                    }
+                }
+            } 
+
+            /* TEST OK: gamma */
+            if(isset($_POST["gamma"])){
+                $gamma = $_POST["gamma"];
+                if(strlen($gamma) != 0){
+                    $model->gamma($img,$gamma);
+                    $id = basename($img);
+                }
             }
         }
 
-    	/* TEST OK: kontrast*/
-        if(isset($_POST["contrast"])){
-            $contrast = $_POST["contrast"];
-            if(strlen($contrast) != 0){
-                $model->contrast($img,$contrast);
-                $id = basename($img);
-            }
-        }
-        /* Fit */
-        if(isset($_POST["fitb"]) && isset($_POST["fith"])){
-            $fitb = $_POST["fitb"];
-            $fith = $_POST["fith"];
-            if(strlen($fitb) != 0 && strlen($fith) != 0){
-                $model->fit($img,$fitb,$fith);
-                $id = basename($img);
-            }
-        }
-
-    	/* TEST OK: pixelerate*/
-    	//$model->pixelerate($img,50);
-    	
-    	/* TEST OK: brightness*/
-    	//$model->brightness($img,+50);
-    	
-    	/* TEST OK:  filter grayscale. */
-        if(isset($_POST["greyscale"])){
-            $greyscale = $_POST["greyscale"];
-                $model->greyscale($img);
-                $id = basename($img);
-        }
-
-    	/* TEST OK: crop
-    	$model->crop($img,100,100,25,25);
-    	//sett ny skalering etter utskjæring
-    	$w = 100;
-    	$h = 100;*/
-
-    	/* TEST OK: resize
-    	$model->resize($img,250,250);*/
-
-    	/* TEST OK: resizeHeight og width
-    	$model->resizeWidth($img,500);
-
-    	$model->resizeHeight($img,500);*/
-
-        /* TEST OK: sharpen
-        $model->sharpen($img,70);*/
-        if(isset($_POST["sharpen"])){
-            $sharpen = $_POST["sharpen"];
-            if(strlen($sharpen) != 0){
-                $model->sharpen($img,$sharpen);
-                $id = basename($img);
-            }
-        }
-
-        /* Blur */
-        if(isset($_POST["blur"])){
-            $blur = $_POST["blur"];
-            if(strlen($blur) != 0){
-                $model->blur($img,$blur);
-                $id = basename($img);
-            }
-        }
-
-    	/* TEST ERROR: TIMEOUT
-    	$model->opacity($img,50); */
-
-        /* TEST OK: flip */
-        if(isset($_POST["flip"])){
-            $flip = $_POST["flip"];
-            if(strlen($flip) != 0){
-                $model->flip($img,$flip);
-                $id = basename($img);
-            }
-        }
-
-        /* TEST OK: gamma */
-        if(isset($_POST["gamma"])){
-            $gamma = $_POST["gamma"];
-            if(strlen($gamma) != 0){
-                $model->gamma($img,$gamma);
-                $id = basename($img);
-            }
-        }
-        //$model->gamma($img,1.2);
-
-        /* TEST OK: invert */
-        //$model->invert($img);
 
         /* TEST: crop*/
         //$feil = $model->crop($img,$width,$height,5,5);
         //echo $feil;
 
-    	// skalering av bildet til vising, hvis bildet erover 500px bred
-    	// eller høy, vill denne skalere ned bildet uten å endre det.
-    	if($w > 1200 || $w < 500){
-    		$value = $model->scaleWidth($img,1000);
-    		$w = $value[0];
-    		$h = $value[1];
-    	}
-    	if($h > 900 ){
-    		$value = $model->scaleHeight($img,900);
-    		$w = $value[0];
-    		$h = $value[1];
-    	}
-    	// hvis bredde eller høyde ikke er over 500px, vis bildet som det er.
-    	else{
-    		$w = $w;
-    		$h = $h;
-    	}
     	// load views
         require APP . 'view/header.php';
         require APP . 'view/upload/index.php';

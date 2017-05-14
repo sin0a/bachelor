@@ -61,10 +61,10 @@ class Api extends Controller{
                     $model->resize($new,$res[0],$res[1]);
                 }
                 else if(is_numeric($res[0]) && $res[1] == "auto"){
-                    $model->resizeHeight($new,$res[0],90);
+                    $model->resizeHeight($new,$res[0]);
                 }
                 else if(is_numeric($res[1]) && $res[0] == "auto"){
-                    $model->resizeWidth($new,$res[1],90);
+                    $model->resizeWidth($new,$res[1]);
                 }       
                 else{
                     echo "Resize krever følgende syntax: resize=verdi,verdi eller resize=verdi,auto<br>";

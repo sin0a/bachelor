@@ -1,7 +1,5 @@
 
     <footer class="footer">
-        <p style="color: #ffffff;">Dett er et bachelorprosjekt ved Høgskolen i Sørøst-Norge campus Bø</p>
-
     <!-- jQuery, loaded in the recommended protocol-less way -->
     <!-- more http://www.paulirish.com/2010/the-protocol-relative-url/ -->
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -29,84 +27,7 @@
 
     $(document).ready(
     function(){
-        $('.img2').hide();
-        $('.imgPxl').hide();
-        $('.img3').hide();
 
-        $('.file').change(
-            function(){
-                if ($(this).val()) {
-                    $('input:submit').attr('disabled',false);
-                    $('input:checkbox').attr('disabled',false);
-                    // or, as has been pointed out elsewhere:
-                    //$('input:submit').removeAttr('disabled'); 
-                } 
-            });
-        $('.convert').click(
-            function(){
-                if($(this).is(':checked')){
-                    $('select').attr('disabled',false);
-                }
-                else{
-                    $('select').attr('disabled',true);
-                }
-            });
-        $('.greyscale').click(
-            function(){
-                if($(this).is(':checked')){
-                    $('.img1').hide();
-                    $('.img2').show();
-                }
-                else{
-                    $('.img2').hide();
-                    $('.img1').show();
-                }
-            });
-        $('.pxl').click(
-            function(){
-                if($(this).is(':checked')){
-                    $('.imgPxl').show();
-                    $('.img2').hide();
-                    $('.img1').hide();
-                }
-                else{
-                    $('.img2').hide();
-                    $('.img1').show();
-                    $('.imgPxl').hide();
-                }
-            });
-
-        $('.slider').change(
-            function(){
-                $('.slider').val($(this).val());
-                $('.img2').hide();
-                $('.img1').hide();
-                $('.imgPxl').hide();
-                var id = $(this).val();
-
-                if($('.greyscale').is(':checked')){
-                    for (i = 0; i < 100; i++) { 
-                    if(i != id){
-                        $('.brgg'+i).hide();
-                        $('.brg'+i).hide();
-                    }
-                else{
-                    $('.brgg' + i).show();
-                }}
-
-                }
-                else{
-                for (i = 0; i < 100; i++) { 
-                    if(i != id){
-                        $('.brg'+i).hide();
-                        $('.brgg'+i).hide();
-                    }
-                else{
-                    $('.brg' + i).show();
-                }}}
-
-
-            });
         /* Funksjoner som åpner boksene, en for hver boks:*/
         // Blur
         $('#btnBlur').click(function(){
@@ -136,6 +57,30 @@
         $('#btnFit').click(function(){
         $('#fit').toggle();
         });
+        // Resize
+        $('#btnResize').click(function(){
+        $('#resize').toggle();
+        });
+        // Gamma
+        $('#btnGamma').click(function(){
+        $('#gamma').toggle();
+        });
+        // Flip
+        $('#btnFlip').click(function(){
+        $('#flip').toggle();
+        });
+        // Pixelerate
+        $('#btnPixelerate').click(function(){
+        $('#pixelerate').toggle();
+        });
+        // Invert
+        $('#btnInvert').click(function(){
+        $('#invert').toggle();
+        });
+        // Rotate
+        $('#btnRotate').click(function(){
+        $('#rotate').toggle();
+        });
         // Select file i index.php
         $('#fileToUpload').change(function() {
         $('#go').toggle();
@@ -149,16 +94,90 @@
         $('#btnZoomIn').click(function(){
         $('#img1').hide();
         $('#btnZoomIn').hide();
-        $('#btnZoomOut').show();
+        $('#btnZoomIn2').show();
+        $('#btnZoomOut').hide();
+        $('#btnZoomOut2').show();
         $('#img2').show();
         });
         // Zoom
-        $('#btnZoomOut').click(function(){
+        $('#btnZoomIn2').click(function(){
         $('#img2').hide();
+        $('#btnZoomIn2').hide();
+        $('#btnZoomOut2').hide();
+        $('#btnZoomOut3').show();
+        $('#img3').show();
+        });
+        // Zoom
+        $('#btnZoomIn3').click(function(){
+        $('#img4').hide();
+        $('#btnZoomIn2').hide();
+        $('#btnZoomOut2').hide();
+        $('#btnZoomOut3').show();
+        $('#img1').show();
+        });
+        // Zoom
+        $('#btnZoomIn3').click(function(){
+        $('#img2').hide();
+        $('#btnZoomIn2').hide();
+        $('#btnZoomOut2').hide();
+        $('#btnZoomOut3').show();
+        $('#img3').show();
+        });
+        // Zoom
+        $('#btnZoomOut2').click(function(){
+        $('#img2').hide();
+        $('#btnZoomIn2').hide();
+        $('#btnZoomIn').show();
+        $('#btnZoomOut2').hide();
+        $('#btnZoomOut').show();
+        $('#img1').show();
+        });
+        // Zoom
+        $('#btnZoomOut3').click(function(){
+        $('#img3').hide();
+        $('#btnZoomIn2').show();
+        $('#btnZoomOut3').hide();
+        $('#btnZoomOut2').show();
+        $('#img2').show();
+        });
+          // Zoom
+        $('#btnZoomOut').click(function(){
+        $('#img1').hide();
+        $('#btnZoomIn').hide();
+        $('#btnZoomIn4').show();
         $('#btnZoomOut').hide();
+        $('#btnZoomOut4').show();
+        $('#img4').show();
+        });
+        // Zoom
+        $('#btnZoomIn4').click(function(){
+        $('#img4').hide();
+        $('#btnZoomIn4').hide();
+        $('#btnZoomOut4').hide();
+        $('#btnZoomOut').show();
         $('#btnZoomIn').show();
         $('#img1').show();
         });
+         // Zoom
+        $('#btnZoomOut4').click(function(){
+        $('#img4').hide();
+        $('#btnZoomIn4').hide();
+        $('#btnZoomIn5').show();
+        $('#btnZoomOut4').hide();
+        $('#img5').show();
+        });
+        // Zoom
+        $('#btnZoomIn5').click(function(){
+        $('#img5').hide();
+        $('#btnZoomIn5').hide();
+        $('#btnZoomOut4').show();
+        $('#btnZoomIn4').show();
+        $('#img4').show();
+        });
+        // Form
+        $("#btnSubmit").click(function() {
+           $("#editform").submit();
+       });
 
     });
 
