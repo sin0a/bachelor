@@ -13,14 +13,14 @@
             <div class="col-md-4">
                 <p><b>Orginal 300x200:</b></p>
                 <div class="thumbnail">
-                    <img src="<?='/img/site/9801999.jpg'?>"/>
+                    <img src="<?='/img/site/9801999.jpg'?>" alt="hund"/>
                 </div>
             </div>
            
             <div class="col-md-4">
                 <p><b>Med fit 300,300:</b></p>
                  <div class="thumbnail">
-                    <img src="<?='/img/site/3332399.jpg'?>"
+                    <img src="<?='/img/site/3332399.jpg'?>" alt="hund"/>
                 </div>
             </div>
         </div>

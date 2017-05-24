@@ -12,13 +12,13 @@
             <div class="col-md-4">
                 <p><b>Uten filter:</b></p>
                 <div class="thumbnail">
-                    <img src="<?='/img/site/2470689.jpg'?>"/>
+                    <img src="<?='/img/site/2470689.jpg'?>" alt="mari"/>
                 </div>
             </div>
             <div class="col-md-4">
                 <p><b>Med pxl = 5:</b></p>
                 <div class="thumbnail">
-                    <img src="<?='/img/site/9647617.jpg'?>"/>
+                    <img src="<?='/img/site/9647617.jpg'?>" alt="mario"/>
                 </div>
             </div>
         </div>

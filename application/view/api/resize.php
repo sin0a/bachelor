@@ -23,16 +23,15 @@
             <div class="col-md-4">
                 <p><b>Orginal: 300x193</b></p>
                 <div class="thumbnail">
-                    <img src="<?='/img/site/9862606.jpg'?>"/>
+                    <img src="<?='/img/site/9862606.jpg'?>" alt="innsekt"/>
             </div>
             </div>
         <div class="col-md-4">
             <p><b>Etter resize: 250x161</b></p>
             <div class="thumbnail">
-                <img src="<?='/img/site/5669583.jpg'?>"/>
+                <img src="<?='/img/site/5669583.jpg'?>" alt="innsekt"/>
             </div>
         </div>
     </div>
-
-
+    </div>
 </div>

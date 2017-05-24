@@ -13,13 +13,13 @@
             <div class="col-md-4">
                 <p><b>Uten filter:</b></p>
                 <div class="thumbnail">
-                    <img src="<?='/img/site/9862606.jpg'?>"/>
+                    <img src="<?='/img/site/9862606.jpg'?>" alt="innsekt"/>
                 </div>
             </div>
             <div class="col-md-4">
                 <p><b>Med blur = 10:</b></p>
                 <div class="thumbnail">
-                    <img src="<?='/img/site/6755623.jpg'?>"/>
+                    <img src="<?='/img/site/6755623.jpg'?>" alt="innsekt"/>
                 </div>
             </div>
         </div>

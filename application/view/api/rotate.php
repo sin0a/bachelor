@@ -12,17 +12,17 @@
             <div class="col-md-4">
                 <p><b>Orginal:</b></p>
                 <div class="thumbnail">
-                    <img src="<?='/img/site/6862193.jpg'?>"/>
+                    <img src="<?='/img/site/6862193.jpg'?>" alt="katt"/>
                 </div>
             <p><b>Med rotate = -45:</b></p>
             <div class="thumbnail">
-                <img src="<?='/img/site/2926665.jpg'?>"/>
+                <img src="<?='/img/site/2926665.jpg'?>" alt="katt"/>
             </div>
                 </div>
             <div class="col-md-4">
                 <p><b>Med rotate = 90:</b></p>
                 <div class="thumbnail">
-                    <img src="<?='/img/site/0240941.jpg'?>"/>
+                    <img src="<?='/img/site/0240941.jpg'?>" alt="katt"/>
                 </div>
             </div>
             <br>

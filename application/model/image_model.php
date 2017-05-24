@@ -1,6 +1,6 @@
 <?php
     // include composer autoload
-    require 'C:\xampp\vendor\autoload.php';
+    require '/var/www/bachelor/vendor/autoload.php';
     // importerer Intervention Image Manager Class
     use Intervention\Image\ImageManagerStatic as Image;
 
@@ -82,44 +82,44 @@ class ImageModel{
         // Hvis ikke
         else {
             $ischanged = 1;
-            $new = $filnavn.'.gif';
+            $new = $filnavn.'.jpeg';
             // Sjekker om filtypen er støttet, hvis den er støttet blir den midlertidig
             // konvertert til GIF for å utføre videre endringer. Intervention kan bare 
             // utføre operasjoner på GIF, JPG og PNG filer.
             switch($filtype){
                 case 'webp':
                     $im = imagecreatefromwebp($id);
-                    imagegif($im,$new,100);
+                    imagejpeg($im,$new,100);
                     imagedestroy($im);
                     break;
                 case 'jpeg':
                     $im = imagecreatefromjpeg($id);
-                    imagegif($im,$new,100);
+                    imagejpeg($im,$new,100);
                     imagedestroy($im);
                     break;
                 case 'xbm':
                     $im = imagecreatefromxbm($id);
-                    imagegif($im,$new,100);
+                    imagejpeg($im,$new,100);
                     imagedestroy($im);
                     break;
                 case 'wbmp':
                     $im = imagecreatefromwbmp($id);
-                    imagegif($im,$new,100);
+                    imagejpeg($im,$new,100);
                     imagedestroy($im);
                     break;
                 case 'gd':
                     $im = imagecreatefromgd($id);
-                    imagegif($im,$new,100);
+                    imagejpeg($im,$new,100);
                     imagedestroy($im);
                     break;
                 case 'gd2':
                     $im = imagecreatefromgd2($id);
-                    imagegif($im,$new,100);
+                    imagejpeg($im,$new,100);
                     imagedestroy($im);
                     break;
                 case 'bmp':
                     $im = imagecreatefromstring(file_get_contents($filnavn.'.bmp'));
-                    imagegif($im,$new,100);
+                    imagejpeg($im,$new,100);
                     imagedestroy($im);
                     break;
             }
@@ -384,7 +384,7 @@ class ImageModel{
     {
 
         // hvor bildet skal lagres
-        $target_dir = 'C:\xampp\htdocs\bachelor\public\img\\';
+        $target_dir = '/var/www/bachelor/public/img/';
 
         //bildenavn
         $img_name = '/bachelor/img/' . basename($_FILES["fileToUpload"]["name"]);
@@ -422,9 +422,15 @@ class ImageModel{
             echo "<p>Filen er for stor.</p>";
             $uploadOk = 0;
         }
+        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+            && $imageFileType != "gif" && $imageFileType != "gd" && $imageFileType != "gd2" 
+            && $imageFileType != "webp" && $imageFileType != "wbmp" && $imageFileType != "xbm") {
+            $uploadOk = 0;
+        }
         // Sjekker hvis $uploladOk har blitt endrer av en error:
         if ($uploadOk == 0) {
-            echo "<p>Filen ble ikke lastet opp.</p>";
+            header('Location: ' .URL_PROTOCOL.URL_DOMAIN.'/home/error');
+                exit();
         // Hvis alt er ok, prøver å laste opp bildet:
         } else {
             if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
@@ -449,7 +455,7 @@ class ImageModel{
         return $val;   
     }
     public function getPath($id){
-        $img = 'C:\xampp\htdocs\bachelor\public\img\\'.$id;
+        $img = '/var/www/bachelor/public/img/'.$id;
         return $img;
     }
     // genereret et tilfeldig tall som blir bildenavn

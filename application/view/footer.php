@@ -29,6 +29,104 @@
     function(){
 
         /* Funksjoner som åpner boksene, en for hver boks:*/
+        $('.numbersOnly').keyup(function () {
+            if (this.value != this.value.replace(/[^0-9\.]/g, '')) {
+                this.value = this.value.replace(/[^0-9\.]/g, '');
+            }
+            if(parseInt(this.value) > 100){
+                this.value = 100;
+            }
+            else if (this.value.indexOf(".") == 0 ||this.value.indexOf(".") == 1 || this.value.indexOf(".") == 2 || this.value.indexOf(".") == 3) {
+                this.value = ''; 
+            }
+        });
+
+        $('.resizeOnly').keyup(function () {
+            if (this.value.indexOf("a") == 0){
+                 this.value = "auto";
+                 if(this.value.indexOf("a") == 0 && this.value.indexOf("u") == 1 && this.value.indexOf("t") == 2 && this.value.indexOf("o") != 3){
+                    this.value = "";
+                 }
+            } else{ 
+                if (this.value != this.value.replace(/[^0-9\.]/g, '')) {
+                    this.value = this.value.replace(/[^0-9\.]/g, '');
+                }
+                else if (this.value.indexOf(".") == 0 ||this.value.indexOf(".") == 1 || this.value.indexOf(".") == 2 || 
+                    this.value.indexOf(".") == 3 || this.value.indexOf(".") == 4|| this.value.indexOf(".") == 5 || this.value.indexOf(".") == 6) {
+                    this.value = ''; 
+                }
+                if(this.value.length > 5){
+                    this.value = '';
+                }
+            }
+        });
+
+        $('.degreesOnly').keyup(function () {
+            if ($.isNumeric(this.value) === true) {
+                if(parseInt(this.value) > 365){
+                    this.value = 365;
+                }
+                else if(parseInt(this.value) < -365){
+                    this.value = -365;
+                }
+            } 
+            else if(this.value == "-" && this.value.length() > 1){
+                if($.isNumeric(this.value) === false){
+                    this.value = this.value.replace(/[^0-9\.]/g, '');
+                }
+            } else if($.isNumeric(this.value) === false){
+                this.value = this.value.replace(/[^0-9\.]/g, '');
+            }
+            if (this.value.indexOf(".") == 0 ||this.value.indexOf(".") == 1 || this.value.indexOf(".") == 2 || this.value.indexOf(".") == 3 || this.value.indexOf(".") == 4) {
+                this.value = ''; 
+            }
+        });
+
+
+        $('.decimalsOnly').keyup(function () {
+            if (this.value != this.value.replace(/[^0-9\.]/g, '')) {
+                this.value = this.value.replace(/[^0-9\.]/g, '');
+            }
+            if(this.value > 25.0){
+                this.value = 25.0;
+            }
+            else if (this.value.indexOf(".") == 0 ) {
+                this.value = '';
+            }
+            else if(this.value.length > 4){
+                this.value = '';
+            } 
+        });
+
+        $('.numbersNegative').keyup(function () {
+            if ($.isNumeric(this.value) === true) {
+                if(parseInt(this.value) > 100){
+                    this.value = 100;
+                }
+                else if(parseInt(this.value) < -100){
+                    this.value = -100;
+                }
+            } 
+            else if(this.value == "-" && this.value.length() > 1){
+                if($.isNumeric(this.value) === false){
+                    this.value = this.value.replace(/[^0-9\.]/g, '');
+                }
+            } else if($.isNumeric(this.value) === false){
+                this.value = this.value.replace(/[^0-9\.]/g, '');
+            }
+            if (this.value.indexOf(".") == 0 ||this.value.indexOf(".") == 1 || this.value.indexOf(".") == 2 || this.value.indexOf(".") == 3 || this.value.indexOf(".") == 4) {
+                this.value = ''; 
+            }
+        });
+
+        $('.flipOnly').keyup(function () {
+            if (this.value === "v" || this.value === "h"){
+            } else{
+                this.value = "";
+            } 
+        });
+
+        
         // Blur
         $('#btnBlur').click(function(){
         $('#blur').toggle();
@@ -39,6 +137,7 @@
         // Sharpen
         $('#btnSharpen').click(function(){
         $('#sharpen').toggle();
+        $('#inputSharpen').numeric();
         });
         // Greyscale
         $('#btnGreyscale').click(function(){
@@ -180,7 +279,9 @@
         // Form
         $("#btnSubmit").click(function() {
         $("#editform").submit();
+        $("btnSubmit").hide();
         });
+
 
     });
 
@@ -191,5 +292,6 @@
 
     <!-- our JavaScript -->
     <script src="<?php echo URL; ?>js/application.js"></script>
+</footer>
 </body>
 </html>

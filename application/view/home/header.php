@@ -38,15 +38,21 @@
             width: 160px;  
         }
     </style>
+    <title>TOIA</title>
 </head>
-<body>
+<body style="background-image: url(/img/site/7509976.jpeg); -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover; 
+     background-repeat: no-repeat;">
     <!-- navigation -->
     <nav class="navbar navbar-default" style=" background-color: #000000; border-style: none; border-radius: 0px;">
   <div class="container-fluid">
     <div class="nav navbar-nav" style="border-style: none;">
-         <ul class="nav navbar-nav">
-      <li class="<?php echo $home?>"><a style="color: #ffffff" href="<?php echo URL; ?>">Hjem</a></li>
-      <li class="<?php echo $active?>"><a style="color: #ffffff" href="<?php echo URL; ?>api/oppstart">Api</a></li>
+        <ul class="nav navbar-nav">
+            <li class="<?php echo $home?>"><a style="color: #ffffff" href="<?php echo URL; ?>">Hjem</a></li>
+            <li class="<?php echo $active?>"><a style="color: #ffffff" href="<?php echo URL; ?>api/oppstart">Api</a></li>
+        </ul>
     </div>
 </div>
 </nav>

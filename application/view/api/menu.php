@@ -1,6 +1,6 @@
 <div class="wrapper">
     <div class="sidebar-nav" style="float: left;     background-color: #f5f5f5; ">
-        <div class="well" style="width:225px; padding: 8px 0;">
+        <div class="well" style="width:120%; padding: 8px 0;">
             <ul class="list">
                     <li class="title">Oppstart</li>
                     <li class="content"><a href="oppstart">Oppstart</a></li>

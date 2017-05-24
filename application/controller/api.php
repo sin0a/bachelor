@@ -5,7 +5,7 @@
  *
 */
 // include composer autoload
-    require 'C:\xampp\vendor\autoload.php';
+    require '/var/www/bachelor/vendor/autoload.php';
 
 	// import the Intervention Image Manager Class
     use Intervention\Image\ImageManager;

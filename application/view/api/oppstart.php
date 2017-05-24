@@ -2,6 +2,11 @@
     <div class="container" style="margin-left: 250px">
         <h1>Oppstart</h1>
         <p>En liten guide til The Online Image API</p>
+        <h3>Hva er TOIA API?</h3>
+        <p>API står for Application Programming Interface og er en måte
+            for forskjellige programmeringsspråk/platformer å forstå hverandre.</p>
+        <p>Vårt API tilbyr bildebehandling ved lesing av brukerens ønske gjennom en URL.
+            API'et er enkelt å bruke, alle operasjonene vi tilbyr ligger på venstre meny.</p>
         <h3>Krav</h3>
         <p>Api'et krever bare et bilde i form av en URL:</p>
         <div class="kodequote">

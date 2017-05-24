@@ -11,14 +11,15 @@
         <br>
         <h2>Støttede formater:</h2>
         <ul class="list-group">
-            <li class="list-group-item">GD</li class="list-group-item">
-            <li class="list-group-item">GD2</li class="list-group-item">
-            <li class="list-group-item">GIF</li class="list-group-item">
-            <li class="list-group-item">JPEG</li class="list-group-item">
-            <li class="list-group-item">JPG</li class="list-group-item">
-            <li class="list-group-item">PNG</li class="list-group-item">
-            <li class="list-group-item">WBMP</li class="list-group-item">
-            <li class="list-group-item">WEBP</li class="list-group-item">
-            <li class="list-group-item">XBM</li class="list-group-item">
+            <li class="list-group-item">GD</li> 
+            <li class="list-group-item">GD2</li> 
+            <li class="list-group-item">GIF</li> 
+            <li class="list-group-item">JPEG</li> 
+            <li class="list-group-item">JPG</li> 
+            <li class="list-group-item">PNG</li> 
+            <li class="list-group-item">WBMP</li> 
+            <li class="list-group-item">WEBP</li> 
+            <li class="list-group-item">XBM</li> 
         </ul>
+    </div>
 </div>

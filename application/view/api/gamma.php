@@ -12,13 +12,13 @@
             <div class="col-md-4">
                 <p><b>Uten gamma:</b></p>
                 <div class="thumbnail">
-                    <img src="<?='/img/site/7733090.jpg'?>"/>
+                    <img src="<?='/img/site/7733090.jpg'?>"  alt="katt"/>
                 </div>
             </div>
             <div class="col-md-4">
                 <p><b>Med gamma = 2.5:</b></p>
                 <div class="thumbnail">
-                    <img src="<?='/img/site/3883110.jpg'?>"/>
+                    <img src="<?='/img/site/3883110.jpg'?>" alt="katt"/>
                 </div>
             </div>
         </div>

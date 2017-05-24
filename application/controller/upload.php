@@ -5,7 +5,7 @@
  *
 */
 // include composer autoload
-    require 'C:\xampp\vendor\autoload.php';
+    require '/var/www/bachelor/vendor/autoload.php';
 	// import the Intervention Image Manager Class
     use Intervention\Image\ImageManager as Image;;
 
@@ -34,10 +34,18 @@ class Upload extends Controller
         $ext = pathinfo($id, PATHINFO_EXTENSION);
         // fil uten filtype
         $utenExt = preg_replace('/\\.[^.\\s]{3,4}$/', '', $img);
-        // backup
-        $model->backup($img,$utenExt,$ext);
     	// sjekker at opplastningen gikk greit
     	if ($uploadOk[0] == 1){
+            // Sjekker om formatet støtter Image intevention
+             $return = $model->checkformat($img,$ext,$utenExt);
+             // Hvis ikke: konvertert til jpeg
+             $img = $return[0];
+             // ny filtype
+             $filtype = pathinfo($img, PATHINFO_EXTENSION);
+            // backup
+            $model->backup($img,$utenExt,$filtype);
+            // ny id
+            $id = basename($img);
     		// sender bruker videre til /image/"bildenavn"
     		header('Location: ' .URL_PROTOCOL.URL_DOMAIN.'/upload/image/'.$id);
 			exit();
@@ -54,15 +62,29 @@ class Upload extends Controller
         $model = $this->loadmodel('image');
         // api_model.php
         $api = $this->loadmodel('api');
-        // Laster opp bildet på serveren
+         // Laster opp bildet på serveren
         $img = $api->uploadFromUrl($_POST['urlToUpload']);
         $id = $model->getID($img);
+        $ext = pathinfo($img, PATHINFO_EXTENSION);
+        // fil uten filtype
+        $utenExt = preg_replace('/\\.[^.\\s]{3,4}$/', '', $img);
+        // backup
+        $model->backup($img,$utenExt,$ext);
         header('Location: ' .URL_PROTOCOL.URL_DOMAIN.'/upload/image/'.$id);
         exit();
+        
     }
     public function image($id){
     	// laster inn image_model.php
     	$model = $this->loadModel('image');
+        // uri
+        $uri = $_SERVER['REQUEST_URI'];
+        $encoded = substr($uri, -8);
+        // sjekker om bildet har blitt konvertert:
+        if($encoded == "?encoded"){
+            // skjuler utfør og reset knappene:
+            $display = "none";
+        }
     	// lagrer full path til bildet
     	$img = $model->getPath($id);
     	// lagrer filtype
@@ -74,6 +96,7 @@ class Upload extends Controller
         $navn = basename($utenExt);
         // henter bredde
         $possible_type = array("gif", "png", "jpg","jpeg");
+
         $ischanged = 0;
         // Hvis filtypen er støttet av intervention, returner ingenting
         if(in_array($ext, $possible_type)){
@@ -90,13 +113,24 @@ class Upload extends Controller
                 $name = $model->getPath($navn);
                 // Sjekker om verdien fra formen er tom
                 if(strlen($encode) != 0){
+                	if(isset($_POST["Sfw"]) && $_POST["Sfw"] == 1){
+                		$sfwWidth = $model->getWidth($img);
+                		$sfwFixed = $sfwWidth - ($sfwWidth/100)*10;
+                		$model->resizeWidth($img, $sfwFixed);
+                		$result = $model->encode($img,$name,$_POST["format"],70);
+                		$id = basename($utenExt).'.'.$_POST["format"];
+                    	// redirecter til riktig side
+                    	header('Location: ' .URL_PROTOCOL.URL_DOMAIN.'/upload/image/'.$id.'?encoded');
+                    	exit();
+                	} else{	
                     // konverterer
                     $result = $model->encode($img,$name,$_POST["format"],$encode);
                     // laster inn bilde på nytt
                     $id = basename($utenExt).'.'.$_POST["format"];
                     // redirecter til riktig side
-                    header('Location: ' .URL_PROTOCOL.URL_DOMAIN.'/upload/image/'.$id);
+                    header('Location: ' .URL_PROTOCOL.URL_DOMAIN.'/upload/image/'.$id.'?encoded');
                     exit();
+                }
                 }
             }
         	/* TEST OK: kontrast*/

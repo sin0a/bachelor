@@ -12,18 +12,18 @@
             <div class="col-md-4">
                 <p><b>Orginal:</b></p>
                 <div class="thumbnail">
-                    <img src="<?='/img/site/9862606.jpg'?>"/>
+                    <img src="<?='/img/site/9862606.jpg'?>" alt="innsekt"/>
                 </div>
             
             <p><b>Med brightness = -40:</b></p>
                 <div class="thumbnail">
-                    <img src="<?='/img/site/6652040.jpg'?>"/>
+                    <img src="<?='/img/site/6652040.jpg'?>" alt="innsekt"/>
                 </div>
             </div>
             <div class="col-md-4">
                 <p><b>Med brightness = 40:</b></p>
                 <div class="thumbnail">
-                    <img src="<?='/img/site/3371084.jpg'?>"/>
+                    <img src="<?='/img/site/3371084.jpg'?>" alt="innsekt"/>
                 </div>
             </div>
             <br>

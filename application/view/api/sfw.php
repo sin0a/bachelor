@@ -21,20 +21,19 @@
             <div class="col-md-4">
                 <p><b>Orginal: 1907kb, 5360x3560</b></p>
                 <div class="thumbnail">
-                    <img src="<?='/img/site/8674005.jpg'?>" width=500 height=332/>
+                    <img src="<?='/img/site/8674005.jpg'?>" alt="katt" width="500" height="332"/>
             </div>
             <p><b>Sfw 40 med resize 1600x1063: 194kb</b></p>
             <div class="thumbnail">
-                    <img src="<?='/img/site/4225171.jpg'?>" width=500 height=332/>
+                    <img src="<?='/img/site/4225171.jpg'?>" alt="katt" width="500" height="332"/>
             </div>
         </div>
         <div class="col-md-4">
             <p><b>Sfw 40: 580kb 5360x3560</b></p>
             <div class="thumbnail">
-                <img src="<?='/img/site/9083913.jpg'?>"width=500 height=332/>
+                <img src="<?='/img/site/9083913.jpg'?>" alt="katt" width="500" height="332"/>
             </div>
         </div>
     </div>
-
-
+</div>
 </div>

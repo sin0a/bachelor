@@ -12,17 +12,17 @@
             <div class="col-md-4">
                 <p><b>Orginal:</b></p>
                 <div class="thumbnail">
-                    <img src="<?='/img/site/1142629.jpg'?>"/>
+                    <img src="<?='/img/site/1142629.jpg'?>" alt="katt"/>
                 </div>
             <p><b>Flip = h:</b></p>
             <div class="thumbnail">
-                <img src="<?='/img/site/8402556.jpg'?>"/>
+                <img src="<?='/img/site/8402556.jpg'?>" alt="katt"/>
             </div>
                 </div>
             <div class="col-md-4">
                 <p><b>Flip = v:</b></p>
                 <div class="thumbnail">
-                    <img src="<?='/img/site/3140962.jpg'?>"/>
+                    <img src="<?='/img/site/3140962.jpg'?>" alt="katt"/>
             </div>
             </div>
             <br>
